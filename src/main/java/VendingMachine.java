@@ -3,7 +3,9 @@
  */
 public class VendingMachine {
 
-    public boolean insert(){
+    public boolean insert(Coin coin){
+        if(coin != null)
+            return true;
       return false;
     }
 }

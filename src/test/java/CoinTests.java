@@ -10,6 +10,11 @@ public class CoinTests {
 @Test
     public void whenNothingIsInsertedIntoTheVendingMachineReturnsFalse(){
         VendingMachine vendingMachine = new VendingMachine();
-        assertFalse(vendingMachine.insert());
+        assertFalse(vendingMachine.insert(null));
+    }
+
+    public void whenCoinIsInsertedIntoTheVendingMachineItReturnTrue(){
+        VendingMachine vendingMachine = new VendingMachine();
+        assertTrue(!vendingMachine.insert(Coin.COIN));
     }
 }
