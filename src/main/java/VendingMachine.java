@@ -31,6 +31,8 @@ public class VendingMachine {
                 return 25;
             case NICKLE:
                 return 5;
+            case DIME:
+                return 10;
             default:
                 return 0;
         }

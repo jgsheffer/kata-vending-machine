@@ -73,7 +73,26 @@ public class CoinTests {
 
     @Test
     public void whenADimeIsInsertedThenTheVendingMachineReturnsCurrentBalanceString() {
-        assertEquals(emptyMachine ,vendingMachine.insert(Coin.DIME));
+        String expectedBalanceString = currentBalanceString+"10";
+        assertEquals(expectedBalanceString ,vendingMachine.insert(Coin.DIME));
+    }
+
+    @Test
+    public void whenMultipleDimesAreInsertedThenTheBalanceIsAddedTogether() {
+        String expectedBalanceFirstCoin = currentBalanceString+"10";
+        String expectedBalanceSecondCoin = currentBalanceString+"20";
+        assertEquals(expectedBalanceFirstCoin,vendingMachine.insert(Coin.DIME));
+        assertEquals(expectedBalanceSecondCoin,vendingMachine.insert(Coin.DIME));
+    }
+
+    @Test
+    public void whenADimeANickleAndAQuarterAreInsertedThenTheBalanceIsCompounded() {
+        String expectedBalanceFirstCoin = currentBalanceString+"5";
+        String expectedBalanceSecondCoin = currentBalanceString+"30";
+        String expectedBalanceThirdCoin = currentBalanceString+"40";
+        assertEquals(expectedBalanceFirstCoin,vendingMachine.insert(Coin.NICKLE));
+        assertEquals(expectedBalanceSecondCoin,vendingMachine.insert(Coin.QUARTER));
+        assertEquals(expectedBalanceThirdCoin,vendingMachine.insert(Coin.DIME));
     }
     @Test
     public void whenADollarCoinIsInsertedThenTheVendingMachineReturnsBlankString() {
