@@ -23,7 +23,7 @@ public class CoinTests {
 
     @Test
     public void vendingMachineCanReturnCurrentBalanceInMachine() {
-        assertEquals("", vendingMachine.getCurrentBalance());
+        assertEquals(0, vendingMachine.getCurrentBalance());
     }
 
     @Test

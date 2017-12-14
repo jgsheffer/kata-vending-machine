@@ -3,14 +3,18 @@
  */
 public class VendingMachine {
 
+    int currentBalance;
 
+    public void VendingMachine(){
+        currentBalance = 0;
+    }
 
     public boolean insert(Coin coin){
         return isCoinValid(coin);
     }
 
-    public String getCurrentBalance() {
-        return "";
+    public int getCurrentBalance() {
+        return currentBalance;
     }
 
     private boolean isCoinValid(Coin coin){
