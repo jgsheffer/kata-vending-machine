@@ -2,7 +2,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
+import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -52,5 +55,48 @@ public class CoinReturnTests {
         assertEquals(expectedCollection, coinReturn.getCoinReturnCollection());
 
 
+    }
+
+    @Test
+    public void whenGivenABalanceOf015_ThenGetChangeToReturnWillReturnANickleAndADime(){
+        ArrayList<Coin> expectedCollection = new ArrayList();
+        expectedCollection.add(Coin.NICKLE);
+        expectedCollection.add(Coin.DIME);
+
+
+        coinReturn.addCorrectChangeToReturn(15);
+
+        assertTrue(coinReturn.getCoinReturnCollection().containsAll(expectedCollection));
+        assertTrue(expectedCollection.containsAll(coinReturn.getCoinReturnCollection()));
+
+
+    }
+    @Test
+    public void whenGivenABalanceOf040_ThenGetChangeToReturnWillReturnANickleQuarterAndADime(){
+        ArrayList<Coin> expectedCollection = new ArrayList();
+        expectedCollection.add(Coin.NICKLE);
+        expectedCollection.add(Coin.DIME);
+        expectedCollection.add(Coin.QUARTER);
+
+        coinReturn.addCorrectChangeToReturn(40);
+        Collections.sort(expectedCollection);
+        assertTrue(coinReturn.getCoinReturnCollection().containsAll(expectedCollection));
+        assertTrue(expectedCollection.containsAll(coinReturn.getCoinReturnCollection()));
+    }
+
+    @Test
+    public void whenGivenABalanceOf115_ThenGetChangeToReturnWillReturnANickleDimeAndFourQuarters(){
+        ArrayList<Coin> expectedCollection = new ArrayList();
+        expectedCollection.add(Coin.NICKLE);
+        expectedCollection.add(Coin.DIME);
+        expectedCollection.add(Coin.QUARTER);
+        expectedCollection.add(Coin.QUARTER);
+        expectedCollection.add(Coin.QUARTER);
+        expectedCollection.add(Coin.QUARTER);
+
+        coinReturn.addCorrectChangeToReturn(115);
+
+        assertTrue(coinReturn.getCoinReturnCollection().containsAll(expectedCollection));
+        assertTrue(expectedCollection.containsAll(coinReturn.getCoinReturnCollection()));
     }
 }
