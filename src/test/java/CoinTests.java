@@ -10,7 +10,9 @@ import static org.junit.Assert.assertTrue;
  */
 public class CoinTests {
     VendingMachine vendingMachine;
-    String emptyMachine = "|| Current Balance  : 0";
+    String currentBalanceString = "|| Current Balance  : ";
+    String emptyMachine = currentBalanceString+"0";
+
 
     @Before
     public void setup() {
@@ -33,8 +35,9 @@ public class CoinTests {
     }
 
     @Test
-    public void whenAQuarterIsInsertedThenTheVendingMachineReturnsCurrentBalanceString() {
-        assertEquals(emptyMachine,vendingMachine.insert(Coin.QUARTER));
+    public void whenAQuarterIsInsertedThenTheVendingMachineReturnsItAddedToTheCurrentBalanceString() {
+        String expectedBalanceString = currentBalanceString+"25";
+        assertEquals(expectedBalanceString,vendingMachine.insert(Coin.QUARTER));
     }
 
     @Test
