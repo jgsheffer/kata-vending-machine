@@ -92,6 +92,20 @@ public class ProductTests {
     }
 
     @Test
+    public void whenNotEnoughMoneyAndIPressThe3Button_ThenTheMessageWillAlternate(){
+        vendingMachine.insert(Coin.QUARTER);
+        String firstExpectedMessage = "PRICE : $1.00";
+        String secondExpectedMessage = "INSERT COIN";
+        String ThirdExpectedMessage = "|| Current Balance  : $0.25";
+
+        assertEquals(firstExpectedMessage, vendingMachine.pressButton(1));
+        assertEquals(secondExpectedMessage, vendingMachine.pressButton(1));
+        assertEquals(ThirdExpectedMessage, vendingMachine.pressButton(1));
+        assertEquals(secondExpectedMessage, vendingMachine.pressButton(1));
+        assertEquals(ThirdExpectedMessage, vendingMachine.pressButton(1));
+    }
+
+    @Test
     public void whenIInsertEnoughMoneyAndIPressTheAnInvalidButton_ThenIWillGetAnInvalidMessage(){
         String expectedMessage = "INVALID OPTION PLEASE SELECT AGAIN";
         assertEquals(expectedMessage, vendingMachine.pressButton(9));

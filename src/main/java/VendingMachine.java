@@ -12,6 +12,7 @@ public class VendingMachine {
     private String currentDisplay = Constants.INSERT_COIN;
     private ArrayList<Coin> coinReturn = new ArrayList<>();
     private boolean hasDisplayedPrice = false;
+    private boolean showInsertCoinSwitch = true;
 
     public VendingMachine(){
         currentBalance = 0;
@@ -83,7 +84,7 @@ public class VendingMachine {
                 hasDisplayedPrice = true;
                 return "PRICE : "+formatMoney(selectedItem.getPrice());
             }else{
-                return Constants.INSERT_COIN;
+                return getInvalidBalanceMessage();
             }
         }else{
             return Constants.INVALID_BUTTON;
@@ -93,6 +94,16 @@ public class VendingMachine {
     private String formatMoney(double amount){
         NumberFormat formatter = NumberFormat.getCurrencyInstance();
         return formatter.format(amount);
+    }
+
+    private String getInvalidBalanceMessage(){
+        if(showInsertCoinSwitch){
+            showInsertCoinSwitch = false;
+            return Constants.INSERT_COIN;
+        }else{
+            showInsertCoinSwitch = true;
+            return currentDisplay;
+        }
     }
 
     private boolean isBalanceHighEnough(double cost){
