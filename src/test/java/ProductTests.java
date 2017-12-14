@@ -65,10 +65,30 @@ public class ProductTests {
 
         assertEquals(expectedMessage, vendingMachine.pressButton(1));
     }
+
+    @Test
+    public void whenIInsertEnoughMoneyAndIPressThe2Button_ThenTheAmountWillBeDeductedFromTheBalance(){
+        Double expectedBalance = 0.0;
+
+        vendingMachine.insert(Coin.QUARTER);
+        vendingMachine.insert(Coin.QUARTER);
+        vendingMachine.pressButton(2);
+
+        assertEquals(expectedBalance, vendingMachine.getCurrentBalance(),0);
+    }
+
     @Test
     public void whenNotEnoughMoneyAndIPressThe1Button_ThenIWillGetAPriceMessage(){
         String expectedMessage = "PRICE : $1.00";
         assertEquals(expectedMessage, vendingMachine.pressButton(1));
+    }
+
+    @Test
+    public void whenNotEnoughMoneyAndIPressThe1Button_ThenIWillGetAPriceMessageTheFirstTimeOnly(){
+        String firstExpectedMessage = "PRICE : $1.00";
+        String secondExpectedMessage = "INSERT COIN";
+        assertEquals(firstExpectedMessage, vendingMachine.pressButton(1));
+        assertEquals(secondExpectedMessage, vendingMachine.pressButton(1));
     }
 
     @Test

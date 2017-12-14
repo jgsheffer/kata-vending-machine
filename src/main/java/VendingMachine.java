@@ -11,6 +11,7 @@ public class VendingMachine {
     private HashMap<Integer, ItemSlot> inventory = new HashMap<>();
     private String currentDisplay = Constants.INSERT_COIN;
     private ArrayList<Coin> coinReturn = new ArrayList<>();
+    private boolean hasDisplayedPrice = false;
 
     public VendingMachine(){
         currentBalance = 0;
@@ -76,9 +77,13 @@ public class VendingMachine {
         ItemSlot selectedItem = getItemSlot(position);
         if(selectedItem != null) {
             if(isBalanceHighEnough(selectedItem.getPrice())) {
+                currentBalance = currentBalance - selectedItem.getPrice();
                 return Constants.THANK_YOU;
-            }else{
+            }else if(!hasDisplayedPrice){
+                hasDisplayedPrice = true;
                 return "PRICE : "+formatMoney(selectedItem.getPrice());
+            }else{
+                return Constants.INSERT_COIN;
             }
         }else{
             return Constants.INVALID_BUTTON;
