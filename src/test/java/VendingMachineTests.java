@@ -11,7 +11,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by Jared on 12/13/2017.
  */
-public class ProductTests {
+public class VendingMachineTests {
     VendingMachine vendingMachine;
     String slotOneName ="cola";
     int slotOnePrice =100;
@@ -172,5 +172,22 @@ public class ProductTests {
 
         assertEquals(expectedMessage, vendingMachine.getCurrentDisplay());
     }
+
+    @Test
+    public void whenPressingCoinReturnButton_ThenAllChangeIsReturnedToCoinReturn(){
+        ArrayList<Coin> expectedCoinReturnCollection = new ArrayList<>();
+        expectedCoinReturnCollection.add(Coin.QUARTER);
+        expectedCoinReturnCollection.add(Coin.QUARTER);
+        expectedCoinReturnCollection.add(Coin.QUARTER);
+        vendingMachine.insert(Coin.QUARTER);
+        vendingMachine.insert(Coin.QUARTER);
+        vendingMachine.insert(Coin.QUARTER);
+
+        vendingMachine.pushChangeReturnButton();
+
+        assertEquals(expectedCoinReturnCollection, vendingMachine.getCoinReturn().getCoinReturnCollection());
+    }
+
+
 
 }
