@@ -22,11 +22,6 @@ public class CoinTests {
     }
 
     @Test
-    public void whenCoinIsInsertedIntoTheVendingMachineItReturnTrue() {
-        assertTrue(vendingMachine.insert(Coin.COIN));
-    }
-
-    @Test
     public void vendingMachineCanReturnCurrentBalanceInMachine() {
         assertEquals("", vendingMachine.getCurrentBalance());
     }
@@ -50,6 +45,9 @@ public class CoinTests {
     public void whenADimeIsInsertedThenTheVendingMachineReturnsTrue() {
         assertTrue(vendingMachine.insert(Coin.DIME));
     }
-
+    @Test
+    public void whenADollarCoinIsInsertedThenTheVendingMachineReturnsFalse() {
+        assertFalse(vendingMachine.insert(Coin.DOLLAR));
+    }
 
 }

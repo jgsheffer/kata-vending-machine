@@ -6,12 +6,14 @@ public class VendingMachine {
 
 
     public boolean insert(Coin coin){
-        if(coin != null && coin != Coin.PENNY)
-            return true;
-      return false;
+        return isCoinValid(coin);
     }
 
     public String getCurrentBalance() {
         return "";
+    }
+
+    private boolean isCoinValid(Coin coin){
+        return (coin == Coin.NICKLE || coin == Coin.DIME  || coin == Coin.QUARTER);
     }
 }
