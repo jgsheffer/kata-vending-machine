@@ -120,13 +120,13 @@ public class CoinTests {
     @Test
     public void whenADollarCoinIsInserted_ThenItIsAddedToTheCoinReturn() {
         ArrayList<Coin> expectedCoinReturn = new ArrayList<>();
-        assertEquals(expectedCoinReturn,vendingMachine.getCoinReturn());
+        assertEquals(expectedCoinReturn,vendingMachine.getCoinReturn().getCoinReturnCollection());
 
         vendingMachine.insert(Coin.DOLLAR);
         expectedCoinReturn.add(Coin.DOLLAR);
         vendingMachine.insert(Coin.QUARTER);
 
-        assertEquals(expectedCoinReturn,vendingMachine.getCoinReturn());
+        assertEquals(expectedCoinReturn,vendingMachine.getCoinReturn().getCoinReturnCollection());
     }
 
     @Test
@@ -139,7 +139,7 @@ public class CoinTests {
         vendingMachine.insert(Coin.DOLLAR);
         vendingMachine.insert(Coin.PENNY);
 
-        assertEquals(expectedCoinReturn,vendingMachine.getCoinReturn());
+        assertEquals(expectedCoinReturn,vendingMachine.getCoinReturn().getCoinReturnCollection());
     }
 
     @Test
@@ -148,9 +148,9 @@ public class CoinTests {
         vendingMachine.insert(Coin.DOLLAR);
         vendingMachine.insert(Coin.DOLLAR);
 
-        vendingMachine.emptyCoinReturn();
+        vendingMachine.getCoinReturn().emptyCoinReturn();
 
-        assertEquals(expectedCoinReturn,vendingMachine.getCoinReturn());
+        assertEquals(expectedCoinReturn,vendingMachine.getCoinReturn().getCoinReturnCollection());
     }
 
     @Test

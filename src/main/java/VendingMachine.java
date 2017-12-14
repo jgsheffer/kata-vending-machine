@@ -9,15 +9,25 @@ import java.util.HashMap;
 public class VendingMachine {
 
     private double currentBalance;
-    private HashMap<Integer, ItemSlot> inventory = new HashMap<>();
-    private String currentDisplay = Constants.INSERT_COIN;
-    private ArrayList<Coin> coinReturn = new ArrayList<>();
-    private boolean hasDisplayedPrice = false;
-    private boolean showInsertCoinSwitch = true;
-    private ArrayList<Coin> currentCoinBalanceCollection = new ArrayList<>();
+    private HashMap<Integer, ItemSlot> inventory;
+    private String currentDisplay;
+    private CoinReturn coinReturn;
+    private boolean hasDisplayedPrice;
+    private boolean showInsertCoinSwitch;
+    private ArrayList<Coin> currentCoinBalanceCollection;
 
     public VendingMachine(){
+        initializeVendingMachine();
+    }
+
+    public void initializeVendingMachine(){
         currentBalance = 0;
+        currentDisplay = Constants.INSERT_COIN;
+        inventory = new HashMap<>();
+        coinReturn = new CoinReturn();
+        hasDisplayedPrice = false;
+        showInsertCoinSwitch  = true;
+        currentCoinBalanceCollection  = new ArrayList<>();
         setupInventory();
     }
 
@@ -27,7 +37,7 @@ public class VendingMachine {
             currentCoinBalanceCollection.add(coin);
             currentDisplay = Constants.CURRENT_BALANCE_STRING_START + formatMoney(currentBalance);
         }else {
-            coinReturn.add(coin);
+            coinReturn.addCoinToCoinReturn(coin);
         }
         return currentDisplay;
     }
@@ -67,13 +77,8 @@ public class VendingMachine {
 
     }
 
-    public ArrayList<Coin> getCoinReturn() {
+    public CoinReturn getCoinReturn() {
         return coinReturn;
-    }
-
-
-    public void emptyCoinReturn() {
-        coinReturn.clear();
     }
 
     public ItemSlot getItemSlot(Integer position){
@@ -121,4 +126,6 @@ public class VendingMachine {
     public ArrayList<Coin> getCurrentCoinBalanceCollection() {
         return currentCoinBalanceCollection;
     }
+
+
 }
