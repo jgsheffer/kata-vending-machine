@@ -55,4 +55,8 @@ public class VendingMachine {
     public void emptyCoinReturn() {
         coinReturn.clear();
     }
+
+    public ItemSlot getItemSlot(){
+        return new ItemSlot();
+    }
 }
