@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * Created by Jared on 12/13/2017.
  */
@@ -9,11 +11,14 @@ public class VendingMachine {
         currentBalance = 0;
     }
     private String currentDisplay = Constants.INSERT_COIN;
+    private ArrayList<Coin> coinReturn = new ArrayList<>();
 
     public String insert(Coin coin){
         if(isCoinValid(coin)) {
             currentBalance = currentBalance + getCoinValue(coin);
             currentDisplay = Constants.CURRENT_BALANCE_STRING_START + currentBalance;
+        }else {
+            coinReturn.add(coin);
         }
         return currentDisplay;
     }
@@ -40,4 +45,12 @@ public class VendingMachine {
 
     }
 
+    public ArrayList<Coin> getCoinReturn() {
+        return coinReturn;
+    }
+
+
+    public void emptyCoinReturn() {
+        coinReturn.clear();
+    }
 }

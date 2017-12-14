@@ -1,6 +1,8 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -37,6 +39,7 @@ public class CoinTests {
     @Test
     public void whenAQuarterIsInsertedThenTheVendingMachineReturnsItAddedToTheCurrentBalanceString() {
         String expectedBalanceString = currentBalanceString+"25";
+
         assertEquals(expectedBalanceString,vendingMachine.insert(Coin.QUARTER));
     }
 
@@ -44,6 +47,7 @@ public class CoinTests {
     public void whenMultipleQuartersAreInsertedThenTheBalanceIsAddedTogether() {
         String expectedBalanceFirstCoin = currentBalanceString+"25";
         String expectedBalanceSecondCoin = currentBalanceString+"50";
+
         assertEquals(expectedBalanceFirstCoin,vendingMachine.insert(Coin.QUARTER));
         assertEquals(expectedBalanceSecondCoin,vendingMachine.insert(Coin.QUARTER));
     }
@@ -51,6 +55,7 @@ public class CoinTests {
     @Test
     public void whenANickleIsInsertedThenTheVendingMachineReturnsCurrentBalanceString() {
         String expectedBalanceString = currentBalanceString+"5";
+
         assertEquals(expectedBalanceString,vendingMachine.insert(Coin.NICKLE));
     }
 
@@ -58,6 +63,7 @@ public class CoinTests {
     public void whenMultipleNicklesAreInsertedThenTheBalanceIsAddedTogether() {
         String expectedBalanceFirstCoin = currentBalanceString+"5";
         String expectedBalanceSecondCoin = currentBalanceString+"10";
+
         assertEquals(expectedBalanceFirstCoin,vendingMachine.insert(Coin.NICKLE));
         assertEquals(expectedBalanceSecondCoin,vendingMachine.insert(Coin.NICKLE));
     }
@@ -66,6 +72,7 @@ public class CoinTests {
     public void whenANickleAndAQuarterAreInsertedThenTheBalanceIsCompounded() {
         String expectedBalanceFirstCoin = currentBalanceString+"5";
         String expectedBalanceSecondCoin = currentBalanceString+"30";
+
         assertEquals(expectedBalanceFirstCoin,vendingMachine.insert(Coin.NICKLE));
         assertEquals(expectedBalanceSecondCoin,vendingMachine.insert(Coin.QUARTER));
     }
@@ -74,6 +81,7 @@ public class CoinTests {
     @Test
     public void whenADimeIsInsertedThenTheVendingMachineReturnsCurrentBalanceString() {
         String expectedBalanceString = currentBalanceString+"10";
+
         assertEquals(expectedBalanceString ,vendingMachine.insert(Coin.DIME));
     }
 
@@ -81,6 +89,7 @@ public class CoinTests {
     public void whenMultipleDimesAreInsertedThenTheBalanceIsAddedTogether() {
         String expectedBalanceFirstCoin = currentBalanceString+"10";
         String expectedBalanceSecondCoin = currentBalanceString+"20";
+
         assertEquals(expectedBalanceFirstCoin,vendingMachine.insert(Coin.DIME));
         assertEquals(expectedBalanceSecondCoin,vendingMachine.insert(Coin.DIME));
     }
@@ -90,6 +99,7 @@ public class CoinTests {
         String expectedBalanceFirstCoin = currentBalanceString+"5";
         String expectedBalanceSecondCoin = currentBalanceString+"30";
         String expectedBalanceThirdCoin = currentBalanceString+"40";
+
         assertEquals(expectedBalanceFirstCoin,vendingMachine.insert(Coin.NICKLE));
         assertEquals(expectedBalanceSecondCoin,vendingMachine.insert(Coin.QUARTER));
         assertEquals(expectedBalanceThirdCoin,vendingMachine.insert(Coin.DIME));
@@ -102,8 +112,45 @@ public class CoinTests {
     @Test
     public void whenNothingIsInsertedAfterAQuarterItStillReturnsTheCurrentBalanceString() {
         String expectedBalanceFirstCoin = currentBalanceString+"25";
+
         assertEquals(expectedBalanceFirstCoin,vendingMachine.insert(Coin.QUARTER));
         assertEquals(expectedBalanceFirstCoin,vendingMachine.insert(null));
+    }
+
+    @Test
+    public void whenADollarCoinIsInsertedItIsAddedToTheCoinReturn() {
+        ArrayList<Coin> expectedCoinReturn = new ArrayList<>();
+        assertEquals(expectedCoinReturn,vendingMachine.getCoinReturn());
+
+        vendingMachine.insert(Coin.DOLLAR);
+        expectedCoinReturn.add(Coin.DOLLAR);
+        vendingMachine.insert(Coin.QUARTER);
+
+        assertEquals(expectedCoinReturn,vendingMachine.getCoinReturn());
+    }
+
+    @Test
+    public void whenMultipleInvalidCoinsAreInsertedThenTheyAreAllSentToTheCoinReturn() {
+        ArrayList<Coin> expectedCoinReturn = new ArrayList<>();
+        expectedCoinReturn.add(Coin.DOLLAR);
+        expectedCoinReturn.add(Coin.PENNY);
+
+
+        vendingMachine.insert(Coin.DOLLAR);
+        vendingMachine.insert(Coin.PENNY);
+
+        assertEquals(expectedCoinReturn,vendingMachine.getCoinReturn());
+    }
+
+    @Test
+    public void theCoinReturnCanBeEmptied() {
+        ArrayList<Coin> expectedCoinReturn = new ArrayList<>();
+        vendingMachine.insert(Coin.DOLLAR);
+        vendingMachine.insert(Coin.DOLLAR);
+
+        vendingMachine.emptyCoinReturn();
+
+        assertEquals(expectedCoinReturn,vendingMachine.getCoinReturn());
     }
 
 
