@@ -8,15 +8,14 @@ public class VendingMachine {
     public void VendingMachine(){
         currentBalance = 0;
     }
+    private String currentDisplay = Constants.INSERT_COIN;
 
     public String insert(Coin coin){
-        if(isCoinValid(coin)){
+        if(isCoinValid(coin)) {
             currentBalance = currentBalance + getCoinValue(coin);
-            return Constants.CURRENT_BALANCE_STRING_START+currentBalance;
-        }else if(coin == null){
-            return Constants.INSERT_COIN;
+            currentDisplay = Constants.CURRENT_BALANCE_STRING_START + currentBalance;
         }
-        return "";
+        return currentDisplay;
     }
 
     public int getCurrentBalance() {

@@ -11,7 +11,7 @@ import static org.junit.Assert.assertTrue;
 public class CoinTests {
     VendingMachine vendingMachine;
     String currentBalanceString = "|| Current Balance  : ";
-    String emptyMachine = currentBalanceString+"0";
+    String emptyMachine = "INSERT COIN";
 
 
     @Before
@@ -31,7 +31,7 @@ public class CoinTests {
 
     @Test
     public void whenAPennyIsInsertedThenTheVendingMachineReturnsBlankString() {
-        assertEquals("",vendingMachine.insert(Coin.PENNY));
+        assertEquals(emptyMachine,vendingMachine.insert(Coin.PENNY));
     }
 
     @Test
@@ -96,7 +96,15 @@ public class CoinTests {
     }
     @Test
     public void whenADollarCoinIsInsertedThenTheVendingMachineReturnsBlankString() {
-        assertEquals("",vendingMachine.insert(Coin.DOLLAR));
+        assertEquals(emptyMachine,vendingMachine.insert(Coin.DOLLAR));
     }
+
+    @Test
+    public void whenNothingIsInsertedAfterAQuarterItStillReturnsTheCurrentBalanceString() {
+        String expectedBalanceFirstCoin = currentBalanceString+"25";
+        assertEquals(expectedBalanceFirstCoin,vendingMachine.insert(Coin.QUARTER));
+        assertEquals(expectedBalanceFirstCoin,vendingMachine.insert(null));
+    }
+
 
 }
