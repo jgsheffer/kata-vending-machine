@@ -19,9 +19,8 @@ public class VendingMachine {
 
     public String insert(Coin coin){
         if(isCoinValid(coin)) {
-            NumberFormat formatter = NumberFormat.getCurrencyInstance();
             currentBalance = currentBalance + getCoinValue(coin);
-            currentDisplay = Constants.CURRENT_BALANCE_STRING_START + formatter.format(currentBalance);
+            currentDisplay = Constants.CURRENT_BALANCE_STRING_START + formatMoney(currentBalance);
         }else {
             coinReturn.add(coin);
         }
@@ -74,6 +73,24 @@ public class VendingMachine {
     }
 
     public String pressButton(Integer position){
-     return "THANK YOU";
+        ItemSlot selectedItem = getItemSlot(position);
+        if(selectedItem != null) {
+            if(isBalanceHighEnough(selectedItem.getPrice())) {
+                return Constants.THANK_YOU;
+            }else{
+                return "PRICE : "+formatMoney(selectedItem.getPrice());
+            }
+        }else{
+            return Constants.INVALID_BUTTON;
+        }
+    }
+
+    private String formatMoney(double amount){
+        NumberFormat formatter = NumberFormat.getCurrencyInstance();
+        return formatter.format(amount);
+    }
+
+    private boolean isBalanceHighEnough(double cost){
+        return currentBalance >= cost;
     }
 }

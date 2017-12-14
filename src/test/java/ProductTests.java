@@ -57,7 +57,24 @@ public class ProductTests {
     @Test
     public void whenIInsertEnoughMoneyAndIPressThe1Button_ThenIWillGetAThankYouMessage(){
         String expectedMessage = "THANK YOU";
+
+        vendingMachine.insert(Coin.QUARTER);
+        vendingMachine.insert(Coin.QUARTER);
+        vendingMachine.insert(Coin.QUARTER);
+        vendingMachine.insert(Coin.QUARTER);
+
         assertEquals(expectedMessage, vendingMachine.pressButton(1));
+    }
+    @Test
+    public void whenNotEnoughMoneyAndIPressThe1Button_ThenIWillGetAPriceMessage(){
+        String expectedMessage = "PRICE : $1.00";
+        assertEquals(expectedMessage, vendingMachine.pressButton(1));
+    }
+
+    @Test
+    public void whenIInsertEnoughMoneyAndIPressTheAnInvalidButton_ThenIWillGetAnInvalidMessage(){
+        String expectedMessage = "INVALID OPTION PLEASE SELECT AGAIN";
+        assertEquals(expectedMessage, vendingMachine.pressButton(9));
     }
 
 }
