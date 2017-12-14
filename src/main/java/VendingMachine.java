@@ -30,6 +30,8 @@ public class VendingMachine {
 
     private void setupInventory(){
         inventory.put(1, new ItemSlot(1.00, "cola"));
+        inventory.put(2, new ItemSlot(0.50, "chips"));
+        inventory.put(3, new ItemSlot(0.65, "candy"));
     }
 
     public double getCurrentBalance() {
