@@ -69,7 +69,11 @@ public class VendingMachine {
         coinReturn.clear();
     }
 
-    public ItemSlot getItemSlot(){
-        return new ItemSlot(0.0, null);
+    public ItemSlot getItemSlot(Integer position){
+        return (ItemSlot)getInventory().get(position);
+    }
+
+    public String pressButton(Integer position){
+     return "THANK YOU";
     }
 }
