@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/vendingMachine.iml" filepath="$PROJECT_DIR$/.idea/modules/vendingMachine.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/vendingMachine_main.iml" filepath="$PROJECT_DIR$/.idea/modules/vendingMachine_main.iml" group="vendingMachine" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/vendingMachine_test.iml" filepath="$PROJECT_DIR$/.idea/modules/vendingMachine_test.iml" group="vendingMachine" />
+    </modules>
+  </component>
+</project>
