@@ -29,6 +29,9 @@ public class VendingMachine {
         return currentDisplay;
     }
 
+    public String getCurrentDisplay(){
+        return currentDisplay;
+    }
     private void setupInventory(){
         inventory.put(1, new ItemSlot(1.00, "cola"));
         inventory.put(2, new ItemSlot(0.50, "chips"));
@@ -74,20 +77,20 @@ public class VendingMachine {
         return (ItemSlot)getInventory().get(position);
     }
 
-    public String pressButton(Integer position){
+    public void pressButton(Integer position){
         ItemSlot selectedItem = getItemSlot(position);
         if(selectedItem != null) {
             if(isBalanceHighEnough(selectedItem.getPrice())) {
                 currentBalance = currentBalance - selectedItem.getPrice();
-                return Constants.THANK_YOU;
+                currentDisplay =  Constants.THANK_YOU;
             }else if(!hasDisplayedPrice){
                 hasDisplayedPrice = true;
-                return "PRICE : "+formatMoney(selectedItem.getPrice());
+                currentDisplay =  "PRICE : "+formatMoney(selectedItem.getPrice());
             }else{
-                return getInvalidBalanceMessage();
+                currentDisplay =  getInvalidBalanceMessage();
             }
         }else{
-            return Constants.INVALID_BUTTON;
+            currentDisplay =  Constants.INVALID_BUTTON;
         }
     }
 
@@ -97,13 +100,15 @@ public class VendingMachine {
     }
 
     private String getInvalidBalanceMessage(){
+        String message;
         if(showInsertCoinSwitch){
             showInsertCoinSwitch = false;
-            return Constants.INSERT_COIN;
+            message = Constants.INSERT_COIN;
         }else{
             showInsertCoinSwitch = true;
-            return currentDisplay;
+            message =  Constants.CURRENT_BALANCE_STRING_START + formatMoney(currentBalance);
         }
+        return message;
     }
 
     private boolean isBalanceHighEnough(double cost){

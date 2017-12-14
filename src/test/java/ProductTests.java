@@ -62,8 +62,9 @@ public class ProductTests {
         vendingMachine.insert(Coin.QUARTER);
         vendingMachine.insert(Coin.QUARTER);
         vendingMachine.insert(Coin.QUARTER);
+        vendingMachine.pressButton(1);
 
-        assertEquals(expectedMessage, vendingMachine.pressButton(1));
+        assertEquals(expectedMessage, vendingMachine.getCurrentDisplay());
     }
 
     @Test
@@ -80,15 +81,22 @@ public class ProductTests {
     @Test
     public void whenNotEnoughMoneyAndIPressThe1Button_ThenIWillGetAPriceMessage(){
         String expectedMessage = "PRICE : $1.00";
-        assertEquals(expectedMessage, vendingMachine.pressButton(1));
+
+        vendingMachine.pressButton(1);
+
+        assertEquals(expectedMessage, vendingMachine.getCurrentDisplay());
     }
 
     @Test
     public void whenNotEnoughMoneyAndIPressThe1Button_ThenIWillGetAPriceMessageTheFirstTimeOnly(){
         String firstExpectedMessage = "PRICE : $1.00";
         String secondExpectedMessage = "INSERT COIN";
-        assertEquals(firstExpectedMessage, vendingMachine.pressButton(1));
-        assertEquals(secondExpectedMessage, vendingMachine.pressButton(1));
+
+        vendingMachine.pressButton(1);
+        assertEquals(firstExpectedMessage, vendingMachine.getCurrentDisplay());
+        vendingMachine.pressButton(1);
+
+        assertEquals(secondExpectedMessage, vendingMachine.getCurrentDisplay());
     }
 
     @Test
@@ -98,17 +106,22 @@ public class ProductTests {
         String secondExpectedMessage = "INSERT COIN";
         String ThirdExpectedMessage = "|| Current Balance  : $0.25";
 
-        assertEquals(firstExpectedMessage, vendingMachine.pressButton(1));
-        assertEquals(secondExpectedMessage, vendingMachine.pressButton(1));
-        assertEquals(ThirdExpectedMessage, vendingMachine.pressButton(1));
-        assertEquals(secondExpectedMessage, vendingMachine.pressButton(1));
-        assertEquals(ThirdExpectedMessage, vendingMachine.pressButton(1));
+        vendingMachine.pressButton(1);
+        assertEquals(firstExpectedMessage, vendingMachine.getCurrentDisplay());
+        vendingMachine.pressButton(1);
+        assertEquals(secondExpectedMessage, vendingMachine.getCurrentDisplay());
+        vendingMachine.pressButton(1);
+        assertEquals(ThirdExpectedMessage, vendingMachine.getCurrentDisplay());
+        vendingMachine.pressButton(1);
+        assertEquals(secondExpectedMessage, vendingMachine.getCurrentDisplay());
     }
 
     @Test
     public void whenIInsertEnoughMoneyAndIPressTheAnInvalidButton_ThenIWillGetAnInvalidMessage(){
         String expectedMessage = "INVALID OPTION PLEASE SELECT AGAIN";
-        assertEquals(expectedMessage, vendingMachine.pressButton(9));
+        vendingMachine.pressButton(9);
+
+        assertEquals(expectedMessage, vendingMachine.getCurrentDisplay());
     }
 
 }
