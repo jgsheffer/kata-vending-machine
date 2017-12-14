@@ -9,8 +9,11 @@ public class VendingMachine {
         currentBalance = 0;
     }
 
-    public boolean insert(Coin coin){
-        return isCoinValid(coin);
+    public String insert(Coin coin){
+        if(isCoinValid(coin)){
+            return Constants.CURRENT_BALANCE_STRING_START+currentBalance;
+        }
+        return "";
     }
 
     public int getCurrentBalance() {
@@ -20,4 +23,5 @@ public class VendingMachine {
     private boolean isCoinValid(Coin coin){
         return (coin == Coin.NICKLE || coin == Coin.DIME  || coin == Coin.QUARTER);
     }
+
 }

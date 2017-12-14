@@ -10,6 +10,7 @@ import static org.junit.Assert.assertTrue;
  */
 public class CoinTests {
     VendingMachine vendingMachine;
+    String emptyMachine = "|| Current Balance  : 0";
 
     @Before
     public void setup() {
@@ -17,8 +18,8 @@ public class CoinTests {
     }
 
     @Test
-    public void whenNothingIsInsertedIntoTheVendingMachineReturnsFalse() {
-        assertFalse(vendingMachine.insert(null));
+    public void whenNothingIsInsertedIntoTheVendingMachineReturnsCurrentBalanceString() {
+        assertEquals("",vendingMachine.insert(null));
     }
 
     @Test
@@ -27,27 +28,27 @@ public class CoinTests {
     }
 
     @Test
-    public void whenAPennyIsInsertedThenTheVendingMachineReturnsFalse() {
-        assertFalse(vendingMachine.insert(Coin.PENNY));
+    public void whenAPennyIsInsertedThenTheVendingMachineReturnsBlankString() {
+        assertEquals("",vendingMachine.insert(Coin.PENNY));
     }
 
     @Test
-    public void whenAQuarterIsInsertedThenTheVendingMachineReturnsTrue() {
-        assertTrue(vendingMachine.insert(Coin.QUARTER));
+    public void whenAQuarterIsInsertedThenTheVendingMachineReturnsCurrentBalanceString() {
+        assertEquals(emptyMachine,vendingMachine.insert(Coin.QUARTER));
     }
 
     @Test
-    public void whenANickleIsInsertedThenTheVendingMachineReturnsTrue() {
-        assertTrue(vendingMachine.insert(Coin.NICKLE));
+    public void whenANickleIsInsertedThenTheVendingMachineReturnsCurrentBalanceString() {
+        assertEquals(emptyMachine,vendingMachine.insert(Coin.NICKLE));
     }
 
     @Test
-    public void whenADimeIsInsertedThenTheVendingMachineReturnsTrue() {
-        assertTrue(vendingMachine.insert(Coin.DIME));
+    public void whenADimeIsInsertedThenTheVendingMachineReturnsCurrentBalanceString() {
+        assertEquals(emptyMachine ,vendingMachine.insert(Coin.DIME));
     }
     @Test
-    public void whenADollarCoinIsInsertedThenTheVendingMachineReturnsFalse() {
-        assertFalse(vendingMachine.insert(Coin.DOLLAR));
+    public void whenADollarCoinIsInsertedThenTheVendingMachineReturnsBlankString() {
+        assertEquals("",vendingMachine.insert(Coin.DOLLAR));
     }
 
 }
