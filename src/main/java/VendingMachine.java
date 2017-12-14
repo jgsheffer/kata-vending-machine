@@ -3,9 +3,15 @@
  */
 public class VendingMachine {
 
+
+
     public boolean insert(Coin coin){
         if(coin != null)
             return true;
       return false;
+    }
+
+    public String getCurrentBalance() {
+        return "";
     }
 }

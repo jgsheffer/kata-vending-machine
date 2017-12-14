@@ -1,5 +1,6 @@
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -12,9 +13,15 @@ public class CoinTests {
         VendingMachine vendingMachine = new VendingMachine();
         assertFalse(vendingMachine.insert(null));
     }
-
+@Test
     public void whenCoinIsInsertedIntoTheVendingMachineItReturnTrue(){
         VendingMachine vendingMachine = new VendingMachine();
-        assertTrue(!vendingMachine.insert(Coin.COIN));
+        assertTrue(vendingMachine.insert(Coin.COIN));
+    }
+
+    @Test
+    public void vendingMachineCanReturnCurrentBalanceInMachine(){
+        VendingMachine vendingMachine = new VendingMachine();
+        assertEquals("", vendingMachine.getCurrentBalance());
     }
 }
