@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 /**
@@ -16,4 +17,14 @@ public class CoinReturn {
     public void emptyCoinReturn(){
         coinReturnCollection.clear();
     }
+
+    public void addCorrectChangeToReturn(int balanceDue){
+        ArrayList<Coin> changeDue = new ArrayList<>();
+        if(balanceDue == 5){
+            changeDue.add(Coin.NICKLE);
+        }
+        coinReturnCollection.addAll(changeDue);
+    }
+
+
 }

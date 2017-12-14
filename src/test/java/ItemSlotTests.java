@@ -9,7 +9,7 @@ import static org.junit.Assert.assertEquals;
 public class ItemSlotTests {
     @Test
     public void whenItemSlotIsCreated_ThenYouCanGetTheAttributes(){
-        double expectedPrice = 1.00;
+        int expectedPrice = 100;
         String expectedItem = "cola";
         ItemSlot itemSlot = new ItemSlot(expectedPrice, expectedItem);
         assertEquals(itemSlot.getItem(), expectedItem);

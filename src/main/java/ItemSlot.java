@@ -3,16 +3,15 @@
  */
 public class ItemSlot {
 
-    private int position;
-    private double price;
+    private int price;
     private String item;
-    public ItemSlot(double price, String item) {
+    public ItemSlot(int price, String item) {
         this.price = price;
         this.item = item;
     }
 
 
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 

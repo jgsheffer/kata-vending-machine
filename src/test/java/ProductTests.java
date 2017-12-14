@@ -1,6 +1,7 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import static org.junit.Assert.assertEquals;
@@ -12,11 +13,11 @@ import static org.junit.Assert.assertNull;
 public class ProductTests {
     VendingMachine vendingMachine;
     String slotOneName ="cola";
-    double slotOnePrice =1.00;
+    int slotOnePrice =100;
     String slotTwoName ="chips";
-    double slotTwoPrice =0.50;
+    int slotTwoPrice =50;
     String slotThreeName ="candy";
-    double slotThreePrice =0.65;
+    int slotThreePrice =65;
 
     @Before
     public void setup(){
@@ -46,7 +47,7 @@ public class ProductTests {
     @Test
     public void whenVendingMachineIsCreated_ThenItHasAnInventoryWithAnItemSlotContainingCandy(){
         assertEquals(slotThreeName, ((ItemSlot)vendingMachine.getInventory().get(3)).getItem());
-        assertEquals(slotThreePrice, ((ItemSlot)vendingMachine.getInventory().get(3)).getPrice(),0);
+        assertEquals(slotThreePrice, ((ItemSlot)vendingMachine.getInventory().get(3)).getPrice());
     }
 
     @Test
@@ -122,6 +123,39 @@ public class ProductTests {
         vendingMachine.pressButton(9);
 
         assertEquals(expectedMessage, vendingMachine.getCurrentDisplay());
+    }
+
+    @Test
+    public void whenProductIsPurchased_ThenTheCoinsAreAddedToTheBank(){
+        ArrayList<Coin> expectedBank = new ArrayList<>();
+        expectedBank.add(Coin.QUARTER);
+        expectedBank.add(Coin.QUARTER);
+
+        vendingMachine.insert(Coin.QUARTER);
+        vendingMachine.insert(Coin.QUARTER);
+        vendingMachine.pressButton(2);
+
+        assertEquals(expectedBank, vendingMachine.getBank());
+    }
+
+
+    @Test
+    public void whenProductIsPurchasedWithExtraMoney_ThenTheCoinsAreAddedToTheBankButTheExtraIsSentToTheCoinReturn(){
+        ArrayList<Coin> expectedBank = new ArrayList<>();
+        ArrayList<Coin> expectedCoinReturn = new ArrayList<>();
+        expectedCoinReturn.add(Coin.NICKLE);
+        expectedBank.add(Coin.QUARTER);
+        expectedBank.add(Coin.QUARTER);
+        expectedBank.add(Coin.NICKLE);
+
+
+        vendingMachine.insert(Coin.QUARTER);
+        vendingMachine.insert(Coin.QUARTER);
+        vendingMachine.insert(Coin.NICKLE);
+        vendingMachine.pressButton(2);
+
+        assertEquals(expectedBank, vendingMachine.getBank());
+        assertEquals(expectedCoinReturn, vendingMachine.getCoinReturn().getCoinReturnCollection());
     }
 
 }

@@ -1,4 +1,6 @@
 import javax.management.openmbean.CompositeData;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,19 +10,21 @@ import java.util.HashMap;
  */
 public class VendingMachine {
 
-    private double currentBalance;
+    private int currentBalance;
     private HashMap<Integer, ItemSlot> inventory;
     private String currentDisplay;
     private CoinReturn coinReturn;
     private boolean hasDisplayedPrice;
     private boolean showInsertCoinSwitch;
     private ArrayList<Coin> currentCoinBalanceCollection;
+    private ArrayList<Coin> bank;
 
     public VendingMachine(){
         initializeVendingMachine();
     }
 
     public void initializeVendingMachine(){
+
         currentBalance = 0;
         currentDisplay = Constants.INSERT_COIN;
         inventory = new HashMap<>();
@@ -28,14 +32,15 @@ public class VendingMachine {
         hasDisplayedPrice = false;
         showInsertCoinSwitch  = true;
         currentCoinBalanceCollection  = new ArrayList<>();
+        bank = new ArrayList<>();
         setupInventory();
     }
 
     public String insert(Coin coin){
         if(isCoinValid(coin)) {
-            currentBalance = currentBalance + getCoinValue(coin);
+            currentBalance = currentBalance +getCoinValue(coin);
             currentCoinBalanceCollection.add(coin);
-            currentDisplay = Constants.CURRENT_BALANCE_STRING_START + formatMoney(currentBalance);
+            currentDisplay = Constants.CURRENT_BALANCE_STRING_START + formatMoney(Double.valueOf(currentBalance)/100);
         }else {
             coinReturn.addCoinToCoinReturn(coin);
         }
@@ -46,12 +51,12 @@ public class VendingMachine {
         return currentDisplay;
     }
     private void setupInventory(){
-        inventory.put(1, new ItemSlot(1.00, "cola"));
-        inventory.put(2, new ItemSlot(0.50, "chips"));
-        inventory.put(3, new ItemSlot(0.65, "candy"));
+        inventory.put(1, new ItemSlot(100, "cola"));
+        inventory.put(2, new ItemSlot(50, "chips"));
+        inventory.put(3, new ItemSlot(65, "candy"));
     }
 
-    public double getCurrentBalance() {
+    public int getCurrentBalance() {
         return currentBalance;
     }
 
@@ -63,14 +68,14 @@ public class VendingMachine {
         return (coin == Coin.NICKLE || coin == Coin.DIME  || coin == Coin.QUARTER);
     }
 
-    private double getCoinValue(Coin coin){
+    private int getCoinValue(Coin coin){
         switch (coin) {
             case QUARTER:
-                return 0.25;
+                return 25;
             case NICKLE:
-                return 0.05;
+                return 5;
             case DIME:
-                return 0.10;
+                return 10;
             default:
                 return 0;
         }
@@ -89,17 +94,24 @@ public class VendingMachine {
         ItemSlot selectedItem = getItemSlot(position);
         if(selectedItem != null) {
             if(isBalanceHighEnough(selectedItem.getPrice())) {
-                currentBalance = currentBalance - selectedItem.getPrice();
+                currentBalance = currentBalance -selectedItem.getPrice();
+                sendRemainingBalanceToCoinReturn();
                 currentDisplay =  Constants.THANK_YOU;
             }else if(!hasDisplayedPrice){
                 hasDisplayedPrice = true;
-                currentDisplay =  "PRICE : "+formatMoney(selectedItem.getPrice());
+                currentDisplay =  "PRICE : "+formatMoney(Double.valueOf(selectedItem.getPrice())/100);
             }else{
                 currentDisplay =  getInvalidBalanceMessage();
             }
         }else{
             currentDisplay =  Constants.INVALID_BUTTON;
         }
+    }
+
+    private void sendRemainingBalanceToCoinReturn(){
+        coinReturn.addCorrectChangeToReturn(currentBalance);
+        currentBalance = 0;
+        getBank().addAll(currentCoinBalanceCollection);
     }
 
     private String formatMoney(double amount){
@@ -114,7 +126,7 @@ public class VendingMachine {
             message = Constants.INSERT_COIN;
         }else{
             showInsertCoinSwitch = true;
-            message =  Constants.CURRENT_BALANCE_STRING_START + formatMoney(currentBalance);
+            message =  Constants.CURRENT_BALANCE_STRING_START + formatMoney(Double.valueOf(currentBalance)/100);
         }
         return message;
     }
@@ -128,4 +140,7 @@ public class VendingMachine {
     }
 
 
+    public ArrayList<Coin> getBank() {
+        return bank;
+    }
 }

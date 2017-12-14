@@ -40,6 +40,16 @@ public class CoinReturnTests {
         coinReturn.emptyCoinReturn();
 
         assertEquals( new ArrayList(), coinReturn.getCoinReturnCollection());
+    }
+
+    @Test
+    public void whenGivenABalanceOf005_ThenGetChangeToReturnWillReturnANickle(){
+        ArrayList<Coin> expectedCollection = new ArrayList();
+        expectedCollection.add(Coin.NICKLE);
+
+        coinReturn.addCorrectChangeToReturn(5);
+
+        assertEquals(expectedCollection, coinReturn.getCoinReturnCollection());
 
 
     }
