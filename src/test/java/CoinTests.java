@@ -24,4 +24,10 @@ public class CoinTests {
         VendingMachine vendingMachine = new VendingMachine();
         assertEquals("", vendingMachine.getCurrentBalance());
     }
+
+    @Test
+    public void whenAPennyIsInsertedThenTheVendingMachineReturnsFalse(){
+        VendingMachine vendingMachine = new VendingMachine();
+        assertFalse(vendingMachine.insert(Coin.PENNY));
+    }
 }
