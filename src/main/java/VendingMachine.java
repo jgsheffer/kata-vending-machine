@@ -8,7 +8,7 @@ public class VendingMachine {
 
     double currentBalance;
 
-    public void VendingMachine(){
+    public VendingMachine(){
         currentBalance = 0;
     }
     private String currentDisplay = Constants.INSERT_COIN;
@@ -57,6 +57,6 @@ public class VendingMachine {
     }
 
     public ItemSlot getItemSlot(){
-        return new ItemSlot();
+        return new ItemSlot(0, 0.0, null);
     }
 }
