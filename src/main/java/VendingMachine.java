@@ -29,6 +29,8 @@ public class VendingMachine {
         switch (coin) {
             case QUARTER:
                 return 25;
+            case NICKLE:
+                return 5;
             default:
                 return 0;
         }
