@@ -14,6 +14,7 @@ public class VendingMachine {
 
     public VendingMachine(){
         currentBalance = 0;
+        setupInventory();
     }
 
     public String insert(Coin coin){
@@ -25,6 +26,10 @@ public class VendingMachine {
             coinReturn.add(coin);
         }
         return currentDisplay;
+    }
+
+    private void setupInventory(){
+        inventory.put(1, new ItemSlot(1.00, "cola"));
     }
 
     public double getCurrentBalance() {
