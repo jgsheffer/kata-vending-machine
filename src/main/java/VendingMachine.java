@@ -1,18 +1,20 @@
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Jared on 12/13/2017.
  */
 public class VendingMachine {
 
-    double currentBalance;
+    private double currentBalance;
+    private HashMap<Integer, ItemSlot> inventory = new HashMap<>();
+    private String currentDisplay = Constants.INSERT_COIN;
+    private ArrayList<Coin> coinReturn = new ArrayList<>();
 
     public VendingMachine(){
         currentBalance = 0;
     }
-    private String currentDisplay = Constants.INSERT_COIN;
-    private ArrayList<Coin> coinReturn = new ArrayList<>();
 
     public String insert(Coin coin){
         if(isCoinValid(coin)) {
@@ -27,6 +29,10 @@ public class VendingMachine {
 
     public double getCurrentBalance() {
         return currentBalance;
+    }
+
+    public HashMap getInventory(){
+        return inventory;
     }
 
     private boolean isCoinValid(Coin coin){
@@ -57,6 +63,6 @@ public class VendingMachine {
     }
 
     public ItemSlot getItemSlot(){
-        return new ItemSlot(0, 0.0, null);
+        return new ItemSlot(0.0, null);
     }
 }

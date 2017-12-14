@@ -6,15 +6,11 @@ public class ItemSlot {
     private int position;
     private double price;
     private String item;
-    public ItemSlot(int position, double price, String item) {
-        this.position = position;
+    public ItemSlot(double price, String item) {
         this.price = price;
         this.item = item;
     }
 
-    public int getPosition() {
-        return position;
-    }
 
     public double getPrice() {
         return price;

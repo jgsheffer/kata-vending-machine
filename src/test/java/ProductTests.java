@@ -2,6 +2,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.lang.annotation.Target;
+import java.util.HashMap;
 
 import static org.junit.Assert.assertEquals;
 
@@ -18,5 +19,9 @@ public class ProductTests {
     @Test
     public void getItemSlotReturnsAnItemSlotObject(){
         assertEquals(ItemSlot.class, vendingMachine.getItemSlot().getClass());
+    }
+    @Test
+    public void WhenGetInventoryIsCalled_ThenItReturnsACollectionOfItemSlotsIsReturned(){
+        assertEquals(HashMap.class, vendingMachine.getInventory().getClass());
     }
 }

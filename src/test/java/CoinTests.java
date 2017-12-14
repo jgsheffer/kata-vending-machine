@@ -22,7 +22,7 @@ public class CoinTests {
     }
 
     @Test
-    public void whenNothingIsInsertedIntoTheVendingMachineReturnsCurrentBalanceString() {
+    public void whenNothingIsInsertedIntoTheVendingMachine_ThenItReturnsCurrentBalanceString() {
         assertEquals("INSERT COIN",vendingMachine.insert(null));
     }
 
@@ -32,19 +32,19 @@ public class CoinTests {
     }
 
     @Test
-    public void whenAPennyIsInsertedThenTheVendingMachineReturnsBlankString() {
+    public void whenAPennyIsInserted_ThenTheVendingMachineReturnsBlankString() {
         assertEquals(emptyMachine,vendingMachine.insert(Coin.PENNY));
     }
 
     @Test
-    public void whenAQuarterIsInsertedThenTheVendingMachineReturnsItAddedToTheCurrentBalanceString() {
+    public void whenAQuarterIsInserted_ThenTheVendingMachineReturnsItAddedToTheCurrentBalanceString() {
         String expectedBalanceString = currentBalanceString+"$0.25";
 
         assertEquals(expectedBalanceString,vendingMachine.insert(Coin.QUARTER));
     }
 
     @Test
-    public void whenMultipleQuartersAreInsertedThenTheBalanceIsAddedTogether() {
+    public void whenMultipleQuartersAreInserted_ThenTheBalanceIsAddedTogether() {
         String expectedBalanceFirstCoin = currentBalanceString+"$0.25";
         String expectedBalanceSecondCoin = currentBalanceString+"$0.50";
 
@@ -53,14 +53,14 @@ public class CoinTests {
     }
 
     @Test
-    public void whenANickleIsInsertedThenTheVendingMachineReturnsCurrentBalanceString() {
+    public void whenANickleIsInserted_ThenTheVendingMachineReturnsCurrentBalanceString() {
         String expectedBalanceString = currentBalanceString+"$0.05";
 
         assertEquals(expectedBalanceString,vendingMachine.insert(Coin.NICKLE));
     }
 
     @Test
-    public void whenMultipleNicklesAreInsertedThenTheBalanceIsAddedTogether() {
+    public void whenMultipleNicklesAreInserted_ThenTheBalanceIsAddedTogether() {
         String expectedBalanceFirstCoin = currentBalanceString+"$0.05";
         String expectedBalanceSecondCoin = currentBalanceString+"$0.10";
 
@@ -69,7 +69,7 @@ public class CoinTests {
     }
 
     @Test
-    public void whenANickleAndAQuarterAreInsertedThenTheBalanceIsCompounded() {
+    public void whenANickleAndAQuarterAreInserted_ThenTheBalanceIsCompounded() {
         String expectedBalanceFirstCoin = currentBalanceString+"$0.05";
         String expectedBalanceSecondCoin = currentBalanceString+"$0.30";
 
@@ -79,14 +79,14 @@ public class CoinTests {
 
 
     @Test
-    public void whenADimeIsInsertedThenTheVendingMachineReturnsCurrentBalanceString() {
+    public void whenADimeIsInserted_ThenTheVendingMachineReturnsCurrentBalanceString() {
         String expectedBalanceString = currentBalanceString+"$0.10";
 
         assertEquals(expectedBalanceString ,vendingMachine.insert(Coin.DIME));
     }
 
     @Test
-    public void whenMultipleDimesAreInsertedThenTheBalanceIsAddedTogether() {
+    public void whenMultipleDimesAreInserted_ThenTheBalanceIsAddedTogether() {
         String expectedBalanceFirstCoin = currentBalanceString+"$0.10";
         String expectedBalanceSecondCoin = currentBalanceString+"$0.20";
 
@@ -95,7 +95,7 @@ public class CoinTests {
     }
 
     @Test
-    public void whenADimeANickleAndAQuarterAreInsertedThenTheBalanceIsCompounded() {
+    public void whenADimeANickleAndAQuarterAreInserted_ThenTheBalanceIsCompounded() {
         String expectedBalanceFirstCoin = currentBalanceString+"$0.05";
         String expectedBalanceSecondCoin = currentBalanceString+"$0.30";
         String expectedBalanceThirdCoin = currentBalanceString+"$0.40";
@@ -105,12 +105,12 @@ public class CoinTests {
         assertEquals(expectedBalanceThirdCoin,vendingMachine.insert(Coin.DIME));
     }
     @Test
-    public void whenADollarCoinIsInsertedThenTheVendingMachineReturnsBlankString() {
+    public void whenADollarCoinIsInserted_ThenTheVendingMachineReturnsBlankString() {
         assertEquals(emptyMachine,vendingMachine.insert(Coin.DOLLAR));
     }
 
     @Test
-    public void whenNothingIsInsertedAfterAQuarterItStillReturnsTheCurrentBalanceString() {
+    public void whenNothingIsInsertedAfterAQuarter_ThenItStillReturnsTheCurrentBalanceString() {
         String expectedBalanceFirstCoin = currentBalanceString+"$0.25";
 
         assertEquals(expectedBalanceFirstCoin,vendingMachine.insert(Coin.QUARTER));
@@ -118,7 +118,7 @@ public class CoinTests {
     }
 
     @Test
-    public void whenADollarCoinIsInsertedItIsAddedToTheCoinReturn() {
+    public void whenADollarCoinIsInserted_ThenItIsAddedToTheCoinReturn() {
         ArrayList<Coin> expectedCoinReturn = new ArrayList<>();
         assertEquals(expectedCoinReturn,vendingMachine.getCoinReturn());
 
@@ -130,7 +130,7 @@ public class CoinTests {
     }
 
     @Test
-    public void whenMultipleInvalidCoinsAreInsertedThenTheyAreAllSentToTheCoinReturn() {
+    public void whenMultipleInvalidCoinsAreInserted_ThenTheyAreAllSentToTheCoinReturn() {
         ArrayList<Coin> expectedCoinReturn = new ArrayList<>();
         expectedCoinReturn.add(Coin.DOLLAR);
         expectedCoinReturn.add(Coin.PENNY);
