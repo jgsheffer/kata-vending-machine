@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by Jared on 12/13/2017.
@@ -104,15 +105,12 @@ public class ProductTests {
     public void whenNotEnoughMoneyAndIPressThe3Button_ThenTheMessageWillAlternate(){
         vendingMachine.insert(Coin.QUARTER);
         String firstExpectedMessage = "PRICE : $1.00";
-        String secondExpectedMessage = "INSERT COIN";
-        String ThirdExpectedMessage = "|| Current Balance  : $0.25";
+        String secondExpectedMessage = "|| Current Balance  : $0.25";
 
         vendingMachine.pressButton(1);
         assertEquals(firstExpectedMessage, vendingMachine.getCurrentDisplay());
         vendingMachine.pressButton(1);
         assertEquals(secondExpectedMessage, vendingMachine.getCurrentDisplay());
-        vendingMachine.pressButton(1);
-        assertEquals(ThirdExpectedMessage, vendingMachine.getCurrentDisplay());
         vendingMachine.pressButton(1);
         assertEquals(secondExpectedMessage, vendingMachine.getCurrentDisplay());
     }
@@ -144,6 +142,8 @@ public class ProductTests {
         ArrayList<Coin> expectedBank = new ArrayList<>();
         ArrayList<Coin> expectedCoinReturn = new ArrayList<>();
         expectedCoinReturn.add(Coin.NICKLE);
+        expectedCoinReturn.add(Coin.QUARTER);
+        expectedBank.add(Coin.QUARTER);
         expectedBank.add(Coin.QUARTER);
         expectedBank.add(Coin.QUARTER);
         expectedBank.add(Coin.NICKLE);
@@ -151,11 +151,26 @@ public class ProductTests {
 
         vendingMachine.insert(Coin.QUARTER);
         vendingMachine.insert(Coin.QUARTER);
+        vendingMachine.insert(Coin.QUARTER);
         vendingMachine.insert(Coin.NICKLE);
         vendingMachine.pressButton(2);
 
         assertEquals(expectedBank, vendingMachine.getBank());
-        assertEquals(expectedCoinReturn, vendingMachine.getCoinReturn().getCoinReturnCollection());
+        assertTrue(expectedCoinReturn.containsAll(vendingMachine.getCoinReturn().getCoinReturnCollection()));
+    }
+
+    @Test
+    public void whenAnItemIsSoldOut_ThenIGetASoldOutMessage(){
+        vendingMachine = new VendingMachine(0);
+        String expectedMessage = "SOLD OUT";
+
+        vendingMachine.insert(Coin.QUARTER);
+        vendingMachine.insert(Coin.QUARTER);
+        vendingMachine.insert(Coin.QUARTER);
+        vendingMachine.insert(Coin.QUARTER);
+        vendingMachine.pressButton(1);
+
+        assertEquals(expectedMessage, vendingMachine.getCurrentDisplay());
     }
 
 }

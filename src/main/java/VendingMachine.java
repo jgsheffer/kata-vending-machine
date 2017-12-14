@@ -18,13 +18,20 @@ public class VendingMachine {
     private boolean showInsertCoinSwitch;
     private ArrayList<Coin> currentCoinBalanceCollection;
     private ArrayList<Coin> bank;
+    int numberOfProducts;
 
     public VendingMachine(){
+        numberOfProducts = 10;
+        initializeVendingMachine();
+    }
+
+
+    public VendingMachine(int numberOfProducts){
+        this.numberOfProducts = numberOfProducts;
         initializeVendingMachine();
     }
 
     public void initializeVendingMachine(){
-
         currentBalance = 0;
         currentDisplay = Constants.INSERT_COIN;
         inventory = new HashMap<>();
@@ -50,10 +57,14 @@ public class VendingMachine {
     public String getCurrentDisplay(){
         return currentDisplay;
     }
+
+    public void refeshDisplay(){
+        currentDisplay = getInvalidBalanceMessage();
+    }
     private void setupInventory(){
-        inventory.put(1, new ItemSlot(100, "cola"));
-        inventory.put(2, new ItemSlot(50, "chips"));
-        inventory.put(3, new ItemSlot(65, "candy"));
+        inventory.put(1, new ItemSlot(100, "cola", numberOfProducts));
+        inventory.put(2, new ItemSlot(50, "chips", numberOfProducts));
+        inventory.put(3, new ItemSlot(65, "candy", numberOfProducts));
     }
 
     public int getCurrentBalance() {
@@ -93,13 +104,20 @@ public class VendingMachine {
     public void pressButton(Integer position){
         ItemSlot selectedItem = getItemSlot(position);
         if(selectedItem != null) {
+
             if(isBalanceHighEnough(selectedItem.getPrice())) {
-                currentBalance = currentBalance -selectedItem.getPrice();
-                sendRemainingBalanceToCoinReturn();
-                currentDisplay =  Constants.THANK_YOU;
-            }else if(!hasDisplayedPrice){
+                boolean wasInStock = selectedItem.dispense();
+                if(wasInStock) {
+                    currentBalance = currentBalance - selectedItem.getPrice();
+                    sendRemainingBalanceToCoinReturn();
+                    currentDisplay = Constants.THANK_YOU;
+                }
+                else{
+                    currentDisplay = Constants.SOLD_OUT;
+                }
+            }else if(!hasDisplayedPrice) {
                 hasDisplayedPrice = true;
-                currentDisplay =  "PRICE : "+formatMoney(Double.valueOf(selectedItem.getPrice())/100);
+                currentDisplay = "PRICE : " + formatMoney(Double.valueOf(selectedItem.getPrice()) / 100);
             }else{
                 currentDisplay =  getInvalidBalanceMessage();
             }
@@ -121,12 +139,10 @@ public class VendingMachine {
 
     private String getInvalidBalanceMessage(){
         String message;
-        if(showInsertCoinSwitch){
-            showInsertCoinSwitch = false;
-            message = Constants.INSERT_COIN;
-        }else{
-            showInsertCoinSwitch = true;
+        if(currentBalance > 0){
             message =  Constants.CURRENT_BALANCE_STRING_START + formatMoney(Double.valueOf(currentBalance)/100);
+        }else{
+            message = Constants.INSERT_COIN;
         }
         return message;
     }
