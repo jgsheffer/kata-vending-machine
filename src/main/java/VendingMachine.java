@@ -13,6 +13,8 @@ public class VendingMachine {
         if(isCoinValid(coin)){
             currentBalance = currentBalance + getCoinValue(coin);
             return Constants.CURRENT_BALANCE_STRING_START+currentBalance;
+        }else if(coin == null){
+            return Constants.INSERT_COIN;
         }
         return "";
     }

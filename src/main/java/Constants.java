@@ -3,4 +3,5 @@
  */
 public class Constants {
     public static String CURRENT_BALANCE_STRING_START= "|| Current Balance  : ";
+    public static  String INSERT_COIN = "INSERT COIN";
 }

@@ -21,7 +21,7 @@ public class CoinTests {
 
     @Test
     public void whenNothingIsInsertedIntoTheVendingMachineReturnsCurrentBalanceString() {
-        assertEquals("",vendingMachine.insert(null));
+        assertEquals("INSERT COIN",vendingMachine.insert(null));
     }
 
     @Test
