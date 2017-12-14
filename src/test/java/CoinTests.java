@@ -1,3 +1,4 @@
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -8,26 +9,47 @@ import static org.junit.Assert.assertTrue;
  * Created by Jared on 12/13/2017.
  */
 public class CoinTests {
-@Test
-    public void whenNothingIsInsertedIntoTheVendingMachineReturnsFalse(){
-        VendingMachine vendingMachine = new VendingMachine();
+    VendingMachine vendingMachine;
+
+    @Before
+    public void setup() {
+        vendingMachine = new VendingMachine();
+    }
+
+    @Test
+    public void whenNothingIsInsertedIntoTheVendingMachineReturnsFalse() {
         assertFalse(vendingMachine.insert(null));
     }
-@Test
-    public void whenCoinIsInsertedIntoTheVendingMachineItReturnTrue(){
-        VendingMachine vendingMachine = new VendingMachine();
+
+    @Test
+    public void whenCoinIsInsertedIntoTheVendingMachineItReturnTrue() {
         assertTrue(vendingMachine.insert(Coin.COIN));
     }
 
     @Test
-    public void vendingMachineCanReturnCurrentBalanceInMachine(){
-        VendingMachine vendingMachine = new VendingMachine();
+    public void vendingMachineCanReturnCurrentBalanceInMachine() {
         assertEquals("", vendingMachine.getCurrentBalance());
     }
 
     @Test
-    public void whenAPennyIsInsertedThenTheVendingMachineReturnsFalse(){
-        VendingMachine vendingMachine = new VendingMachine();
+    public void whenAPennyIsInsertedThenTheVendingMachineReturnsFalse() {
         assertFalse(vendingMachine.insert(Coin.PENNY));
     }
+
+    @Test
+    public void whenAQuarterIsInsertedThenTheVendingMachineReturnsTrue() {
+        assertTrue(vendingMachine.insert(Coin.QUARTER));
+    }
+
+    @Test
+    public void whenANickleIsInsertedThenTheVendingMachineReturnsTrue() {
+        assertTrue(vendingMachine.insert(Coin.NICKLE));
+    }
+
+    @Test
+    public void whenADimeIsInsertedThenTheVendingMachineReturnsTrue() {
+        assertTrue(vendingMachine.insert(Coin.DIME));
+    }
+
+
 }
