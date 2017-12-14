@@ -153,5 +153,11 @@ public class CoinTests {
         assertEquals(expectedCoinReturn,vendingMachine.getCoinReturn());
     }
 
+    @Test
+    public void whenACoinIsInserted_ThenItIsAddedToTheCoinBalanceCollection(){
+        vendingMachine.insert(Coin.DIME);
+                assertEquals(Coin.DIME, vendingMachine.getCurrentCoinBalanceCollection().get(0));
+    }
+
 
 }

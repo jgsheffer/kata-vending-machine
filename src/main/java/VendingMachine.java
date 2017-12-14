@@ -1,3 +1,4 @@
+import javax.management.openmbean.CompositeData;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,6 +14,7 @@ public class VendingMachine {
     private ArrayList<Coin> coinReturn = new ArrayList<>();
     private boolean hasDisplayedPrice = false;
     private boolean showInsertCoinSwitch = true;
+    private ArrayList<Coin> currentCoinBalanceCollection = new ArrayList<>();
 
     public VendingMachine(){
         currentBalance = 0;
@@ -22,6 +24,7 @@ public class VendingMachine {
     public String insert(Coin coin){
         if(isCoinValid(coin)) {
             currentBalance = currentBalance + getCoinValue(coin);
+            currentCoinBalanceCollection.add(coin);
             currentDisplay = Constants.CURRENT_BALANCE_STRING_START + formatMoney(currentBalance);
         }else {
             coinReturn.add(coin);
@@ -113,5 +116,9 @@ public class VendingMachine {
 
     private boolean isBalanceHighEnough(double cost){
         return currentBalance >= cost;
+    }
+
+    public ArrayList<Coin> getCurrentCoinBalanceCollection() {
+        return currentCoinBalanceCollection;
     }
 }
