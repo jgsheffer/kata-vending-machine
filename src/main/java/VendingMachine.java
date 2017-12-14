@@ -1,3 +1,4 @@
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 /**
@@ -5,7 +6,7 @@ import java.util.ArrayList;
  */
 public class VendingMachine {
 
-    int currentBalance;
+    double currentBalance;
 
     public void VendingMachine(){
         currentBalance = 0;
@@ -15,15 +16,16 @@ public class VendingMachine {
 
     public String insert(Coin coin){
         if(isCoinValid(coin)) {
+            NumberFormat formatter = NumberFormat.getCurrencyInstance();
             currentBalance = currentBalance + getCoinValue(coin);
-            currentDisplay = Constants.CURRENT_BALANCE_STRING_START + currentBalance;
+            currentDisplay = Constants.CURRENT_BALANCE_STRING_START + formatter.format(currentBalance);
         }else {
             coinReturn.add(coin);
         }
         return currentDisplay;
     }
 
-    public int getCurrentBalance() {
+    public double getCurrentBalance() {
         return currentBalance;
     }
 
@@ -31,14 +33,14 @@ public class VendingMachine {
         return (coin == Coin.NICKLE || coin == Coin.DIME  || coin == Coin.QUARTER);
     }
 
-    private int getCoinValue(Coin coin){
+    private double getCoinValue(Coin coin){
         switch (coin) {
             case QUARTER:
-                return 25;
+                return 0.25;
             case NICKLE:
-                return 5;
+                return 0.05;
             case DIME:
-                return 10;
+                return 0.10;
             default:
                 return 0;
         }
