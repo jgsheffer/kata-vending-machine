@@ -16,7 +16,12 @@ public class CoinTests {
 
     @Before
     public void setup() {
-        vendingMachine = new VendingMachine();
+        ArrayList<Coin> startingChange = new ArrayList<>();
+        startingChange.add(Coin.NICKLE);
+        startingChange.add(Coin.NICKLE);
+        startingChange.add(Coin.NICKLE);
+        startingChange.add(Coin.NICKLE);
+        vendingMachine = new VendingMachine(3,startingChange);
     }
 
     @Test

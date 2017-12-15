@@ -37,19 +37,9 @@ public class ItemSlot {
         return false;
     }
 
-//    public void canMakeChange(ArrayList<Coin> bank){
-//        ArrayList<Coin> worstCaseCollection
-//    }
 
-//    public ArrayList<ArrayList<Coin>> getChangeCombinations(int balance){
-//        int mostPossiblyOwed = getMostPossiblyOwed(removeQuartersFromBalance(balance));
-//        switch(mostPossiblyOwed){
-//            case 5:
-//        }
-//
-//    }
-
-    public int getMostPossiblyOwed(int balance) {
+    public int getMostPossiblyOwed() {
+        int balance = getPrice();
         if ((balance - Constants.QUARTER_AMOUNT) < 0) {
             return Math.abs(balance - Constants.QUARTER_AMOUNT);
         } else {

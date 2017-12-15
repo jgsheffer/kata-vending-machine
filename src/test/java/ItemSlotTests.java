@@ -60,11 +60,16 @@ public class ItemSlotTests {
     }
 
     @Test
-    public void whenGivenABalnceOf70_ThenTheCorrectChangeCombinationsAreReturned() {
-        ArrayList<ArrayList<Coin>> expectedCoinCombinations = new ArrayList<>();
-        ArrayList<Coin> coinCombinationOne = new ArrayList<>();
-        coinCombinationOne.add(Coin.NICKLE);
-        expectedCoinCombinations.add(coinCombinationOne);
+    public void whenCostIs70_ThenGetMostPossiblyOwnedShouldReturn5(){
+        ItemSlot itemSlot = new ItemSlot(70, "cola", 6);
+        int expectedMaxChangeNeeded = 5;
+        assertEquals(expectedMaxChangeNeeded, itemSlot.getMostPossiblyOwed());
+    }
 
+    @Test
+    public void whenCostIs5_ThenGetMostPossiblyOwnedShouldReturn20(){
+        ItemSlot itemSlot = new ItemSlot(5, "cola", 6);
+        int expectedMaxChangeNeeded = 20;
+        assertEquals(expectedMaxChangeNeeded, itemSlot.getMostPossiblyOwed());
     }
 }

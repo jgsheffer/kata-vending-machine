@@ -22,7 +22,6 @@ public class CoinUtility {
             int newBalance = balance - 5 * numOfNickles;
             if (newBalance == 0) {
                 coinCombinations.add(addCoinsToCollection(Coin.NICKLE, numOfNickles));
-                System.out.println(numOfNickles + " Nickles ");
             }
             for (int numberOfDimes = newBalance / 5; numberOfDimes >= 0; numberOfDimes--) {
                 if (newBalance < 10) {
@@ -33,8 +32,6 @@ public class CoinUtility {
                     ArrayList<Coin> nickleAndDimeCollection = addCoinsToCollection(Coin.NICKLE, numOfNickles);
                     nickleAndDimeCollection.addAll(addCoinsToCollection(Coin.DIME, numberOfDimes));
                     coinCombinations.add(nickleAndDimeCollection);
-                    System.out.println(numOfNickles + " Nickles "
-                            + numberOfDimes + " Dimes");
                 }
             }
         }
@@ -42,6 +39,15 @@ public class CoinUtility {
     }
 
     public boolean canMakeChange(ArrayList<Coin> bank, int balanceDue){
+        boolean changeIsPossible = false;
+        ArrayList<ArrayList<Coin>> changePossibilties = getChangeCombinations(balanceDue);
+        for(ArrayList<Coin> change : changePossibilties){
+            if(bank.containsAll(change)){
+                changeIsPossible = true;
+                break;
+            }
+        }
+        return changeIsPossible;
 
     }
 }

@@ -4,6 +4,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -102,7 +103,7 @@ public class CoinUtilityTests {
     }
 
     @Test
-    public void whenTheGivenCollectionCanMakeChange_ThenCanMakeChangeReturnsFalse() {
+    public void whenTheGivenCollectionCanMakeChange_ThenCanMakeChangeReturnsTrue() {
 
         ArrayList<Coin> bank = new ArrayList<>();
         bank.add(Coin.NICKLE);
@@ -110,6 +111,14 @@ public class CoinUtilityTests {
         bank.add(Coin.NICKLE);
         bank.add(Coin.NICKLE);
         assertTrue(coinUtility.canMakeChange(bank ,20 ));
+    }
+
+    @Test
+    public void whenTheGivenCollectionCanNotMakeChange_ThenCanMakeChangeReturnsFalse() {
+
+        ArrayList<Coin> bank = new ArrayList<>();
+
+        assertFalse(coinUtility.canMakeChange(bank ,20 ));
     }
 }
 

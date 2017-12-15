@@ -19,16 +19,16 @@ public class VendingMachine {
 
     public VendingMachine() {
         numberOfProducts = 10;
-        initializeVendingMachine();
+        initializeVendingMachine(new ArrayList<>());
     }
 
 
-    public VendingMachine(int numberOfProducts) {
+    public VendingMachine(int numberOfProducts, ArrayList<Coin> startingChange) {
         this.numberOfProducts = numberOfProducts;
-        initializeVendingMachine();
+        initializeVendingMachine(startingChange);
     }
 
-    public void initializeVendingMachine() {
+    public void initializeVendingMachine(ArrayList<Coin> startingChange) {
         currentBalance = 0;
         currentDisplay = Constants.INSERT_COIN;
         inventory = new HashMap<>();
@@ -36,8 +36,11 @@ public class VendingMachine {
         hasDisplayedPrice = false;
         showInsertCoinSwitch = true;
         currentCoinBalanceCollection = new ArrayList<>();
-        bank = new ArrayList<>();
+        bank =startingChange;
         setupInventory();
+        if(shouldShowExactChangeOnly()){
+            currentDisplay = Constants.EXACT_CHANGE_ONLY;
+        }
     }
 
     public String insert(Coin coin) {
@@ -144,7 +147,11 @@ public class VendingMachine {
         if (currentBalance > 0) {
             message = Constants.CURRENT_BALANCE_STRING_START + formatMoney(Double.valueOf(currentBalance) / 100);
         } else {
-            message = Constants.INSERT_COIN;
+            if(shouldShowExactChangeOnly()){
+                message = Constants.EXACT_CHANGE_ONLY;
+            }else {
+                message = Constants.INSERT_COIN;
+            }
         }
         return message;
     }
@@ -160,5 +167,18 @@ public class VendingMachine {
 
     public ArrayList<Coin> getBank() {
         return bank;
+    }
+
+    private boolean shouldShowExactChangeOnly(){
+        CoinUtility coinUtility = new CoinUtility();
+        ItemSlot itemSlot1 = inventory.get(1);
+        ItemSlot itemSlot2 = inventory.get(2);
+        ItemSlot itemSlot3 = inventory.get(3);
+       boolean canMakeChangeForSlot1 = coinUtility.canMakeChange(bank, inventory.get(1).getMostPossiblyOwed());
+       boolean canMakeChangeForSlot2 = coinUtility.canMakeChange(bank, inventory.get(2).getMostPossiblyOwed());
+       boolean canMakeChangeForSlot3 = coinUtility.canMakeChange(bank, inventory.get(3).getMostPossiblyOwed());
+       return !canMakeChangeForSlot1 && !canMakeChangeForSlot2 && !canMakeChangeForSlot3;
+
+
     }
 }

@@ -94,6 +94,13 @@ public class VendingMachineTests {
         String firstExpectedMessage = "PRICE : $1.00";
         String secondExpectedMessage = "INSERT COIN";
 
+//        Add Money to bank
+        vendingMachine.insert(Coin.NICKLE);
+        vendingMachine.insert(Coin.DIME);
+        vendingMachine.insert(Coin.DIME);
+        vendingMachine.insert(Coin.QUARTER);
+        vendingMachine.pressButton(2);
+
         vendingMachine.pressButton(1);
         assertEquals(firstExpectedMessage, vendingMachine.getCurrentDisplay());
         vendingMachine.pressButton(1);
@@ -161,7 +168,7 @@ public class VendingMachineTests {
 
     @Test
     public void whenAnItemIsSoldOut_ThenIGetASoldOutMessage() {
-        vendingMachine = new VendingMachine(0);
+        vendingMachine = new VendingMachine(0, new ArrayList<>());
         String expectedMessage = "SOLD OUT";
 
         vendingMachine.insert(Coin.QUARTER);
