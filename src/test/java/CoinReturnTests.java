@@ -12,9 +12,18 @@ import static org.junit.Assert.assertEquals;
  */
 public class CoinReturnTests {
     CoinReturn coinReturn;
+    ArrayList<Coin> bank= new ArrayList<>();
 
     @Before
-    public void setup() {
+    public void setup()
+    {
+        bank.add(Coin.QUARTER);
+        bank.add(Coin.QUARTER);
+        bank.add(Coin.QUARTER);
+        bank.add(Coin.QUARTER);
+        bank.add(Coin.NICKLE);
+        bank.add(Coin.NICKLE);
+        bank.add(Coin.DIME);
         coinReturn = new CoinReturn();
     }
 
@@ -50,7 +59,7 @@ public class CoinReturnTests {
         ArrayList<Coin> expectedCollection = new ArrayList();
         expectedCollection.add(Coin.NICKLE);
 
-        coinReturn.addCorrectChangeToReturn(5);
+        coinReturn.addCorrectChangeToReturn(bank,5);
 
         assertEquals(expectedCollection, coinReturn.getCoinReturnCollection());
 
@@ -64,7 +73,7 @@ public class CoinReturnTests {
         expectedCollection.add(Coin.DIME);
 
 
-        coinReturn.addCorrectChangeToReturn(15);
+        coinReturn.addCorrectChangeToReturn(bank, 15);
 
         assertTrue(coinReturn.getCoinReturnCollection().containsAll(expectedCollection));
         assertTrue(expectedCollection.containsAll(coinReturn.getCoinReturnCollection()));
@@ -79,7 +88,7 @@ public class CoinReturnTests {
         expectedCollection.add(Coin.DIME);
         expectedCollection.add(Coin.QUARTER);
 
-        coinReturn.addCorrectChangeToReturn(40);
+        coinReturn.addCorrectChangeToReturn(bank, 40);
         Collections.sort(expectedCollection);
         assertTrue(coinReturn.getCoinReturnCollection().containsAll(expectedCollection));
         assertTrue(expectedCollection.containsAll(coinReturn.getCoinReturnCollection()));
@@ -95,10 +104,21 @@ public class CoinReturnTests {
         expectedCollection.add(Coin.QUARTER);
         expectedCollection.add(Coin.QUARTER);
 
-        coinReturn.addCorrectChangeToReturn(115);
+        coinReturn.addCorrectChangeToReturn(bank, 115);
 
         assertTrue(coinReturn.getCoinReturnCollection().containsAll(expectedCollection));
         assertTrue(expectedCollection.containsAll(coinReturn.getCoinReturnCollection()));
+    }
+
+    @Test
+    public void getCoinReturnStringWillReturnAStringArrayList(){
+        coinReturn.addCoinToCoinReturn(Coin.QUARTER);
+        ArrayList<String> expectedArrayList = new ArrayList<>();
+        expectedArrayList.add("QUARTER");
+
+        assertEquals(expectedArrayList, coinReturn.getCoinReturnString());
+
+
     }
 
 }

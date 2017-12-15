@@ -120,5 +120,42 @@ public class CoinUtilityTests {
 
         assertFalse(coinUtility.canMakeChange(bank ,20 ));
     }
+
+
+    @Test
+    public void removingCoinsOnlyRemovesTheCorrectNumberOfCoins(){
+        ArrayList<Coin> expected = new ArrayList<>();
+        expected.add(Coin.QUARTER);
+        expected.add(Coin.NICKLE);
+
+        ArrayList<Coin> bank = new ArrayList<>();
+        bank.add(Coin.QUARTER);
+        bank.add(Coin.NICKLE);
+
+        bank.add(Coin.NICKLE);
+        ArrayList<Coin> coinsToRemove = new ArrayList<>();
+        coinsToRemove.add(Coin.NICKLE);
+
+        assertEquals(expected, new CoinUtility().removeCoins(bank, coinsToRemove));
+
+    }
+
+    @Test
+    public void addCoinsOnlyIfAvailableTest(){
+        ArrayList<Coin> expected = new ArrayList<>();
+        expected.add(Coin.QUARTER);
+
+        ArrayList<Coin> bank = new ArrayList<>();
+        bank.add(Coin.QUARTER);
+
+        ArrayList<Coin> coinsToAdd = new ArrayList<>();
+        coinsToAdd.add(Coin.NICKLE);
+        coinsToAdd.add(Coin.QUARTER);
+
+        assertEquals(expected, new CoinUtility().addCoinsOnlyIfAvailable(bank, coinsToAdd, new ArrayList<>()));
+
+    }
+
+
 }
 

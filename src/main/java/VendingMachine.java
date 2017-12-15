@@ -128,13 +128,14 @@ public class VendingMachine {
 
     private void sendRemainingBalanceToCoinReturn() {
         getBank().addAll(currentCoinBalanceCollection);
-        coinReturn.addCorrectChangeToReturn(currentBalance);
+        bank = coinReturn.addCorrectChangeToReturn(bank, currentBalance);
         currentBalance = 0;
 
     }
 
     public void pushChangeReturnButton() {
         sendRemainingBalanceToCoinReturn();
+        currentBalance = 0;
     }
 
     private String formatMoney(double amount) {

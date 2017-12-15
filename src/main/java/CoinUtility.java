@@ -50,4 +50,22 @@ public class CoinUtility {
         return changeIsPossible;
 
     }
+
+    public ArrayList removeCoins(ArrayList<Coin> bank, ArrayList<Coin> coinsToRemove){
+        for(Coin coin : coinsToRemove){
+            bank.remove(coin);
+        }
+        return bank;
+    }
+
+    public ArrayList addCoinsOnlyIfAvailable(ArrayList<Coin> bank, ArrayList<Coin> coinsToAdd, ArrayList<Coin> placeToAddCoins) {
+        for (Coin coin : coinsToAdd) {
+            if (bank.contains(coin)) {
+                bank.remove(coin);
+                placeToAddCoins.add(coin);
+            }
+        }
+        return placeToAddCoins;
+    }
+
 }

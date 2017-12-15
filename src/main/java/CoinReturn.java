@@ -19,7 +19,7 @@ public class CoinReturn {
         coinReturnCollection.clear();
     }
 
-    public void addCorrectChangeToReturn(int balanceDue) {
+    public ArrayList addCorrectChangeToReturn(ArrayList<Coin> bank, int balanceDue) {
         ArrayList<Coin> changeDue = new ArrayList<>();
         while (balanceDue > 0) {
             int numberOfQuarters = balanceDue / Constants.QUARTER_AMOUNT;
@@ -34,13 +34,25 @@ public class CoinReturn {
             changeDue.addAll(coinUtility.addCoinsToCollection(Coin.NICKLE, numberOfNickles));
             balanceDue = balanceDue - numberOfNickles * Constants.NICKLE_AMOUNT;
         }
-        coinReturnCollection.addAll(changeDue);
+        CoinUtility coinUtility = new CoinUtility();
+        coinReturnCollection = coinUtility.addCoinsOnlyIfAvailable(bank, changeDue, coinReturnCollection);
+        return bank;
     }
+
+
 
     private ArrayList removeCoinsFromBalance(int balance, Coin coin, int coinValue, ArrayList changeDue) {
         int numberOfCoins = balance / coinValue;
         changeDue.addAll(coinUtility.addCoinsToCollection(coin, numberOfCoins));
         return changeDue;
+    }
+
+    public ArrayList<String> getCoinReturnString(){
+        ArrayList<String> coinReturnString = new ArrayList<>();
+        for(Enum coin : coinReturnCollection){
+            coinReturnString.add(coin.toString());
+        }
+        return coinReturnString;
     }
 
 }
