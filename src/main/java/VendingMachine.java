@@ -17,12 +17,6 @@ public class VendingMachine {
     private ArrayList<Coin> currentCoinBalanceCollection;
     private ArrayList<Coin> bank;
 
-    public VendingMachine() {
-        numberOfProducts = 10;
-        initializeVendingMachine(new ArrayList<>());
-    }
-
-
     public VendingMachine(int numberOfProducts, ArrayList<Coin> startingChange) {
         this.numberOfProducts = numberOfProducts;
         initializeVendingMachine(startingChange);
@@ -86,10 +80,8 @@ public class VendingMachine {
                 return 25;
             case NICKLE:
                 return 5;
-            case DIME:
-                return 10;
             default:
-                return 0;
+                return 10;
         }
 
     }
@@ -179,7 +171,6 @@ public class VendingMachine {
        boolean canMakeChangeForSlot2 = coinUtility.canMakeChange(bank, inventory.get(2).getMostPossiblyOwed());
        boolean canMakeChangeForSlot3 = coinUtility.canMakeChange(bank, inventory.get(3).getMostPossiblyOwed());
        return !canMakeChangeForSlot1 && !canMakeChangeForSlot2 && !canMakeChangeForSlot3;
-
-
     }
+
 }

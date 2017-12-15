@@ -39,14 +39,6 @@ public class CoinReturn {
         return bank;
     }
 
-
-
-    private ArrayList removeCoinsFromBalance(int balance, Coin coin, int coinValue, ArrayList changeDue) {
-        int numberOfCoins = balance / coinValue;
-        changeDue.addAll(coinUtility.addCoinsToCollection(coin, numberOfCoins));
-        return changeDue;
-    }
-
     public ArrayList<String> getCoinReturnString(){
         ArrayList<String> coinReturnString = new ArrayList<>();
         for(Enum coin : coinReturnCollection){

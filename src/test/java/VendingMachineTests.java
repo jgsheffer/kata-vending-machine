@@ -196,7 +196,7 @@ public class VendingMachineTests {
     @Test
     public void whenMachineCantMakeChange_ThenCurrentDisplayShowsCorrectMessage() {
         String expectedMessage = "EXACT CHANGE ONLY";
-
+        vendingMachine.refeshDisplay();
         assertEquals(expectedMessage, vendingMachine.getCurrentDisplay());
     }
 
