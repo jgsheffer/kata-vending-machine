@@ -9,27 +9,27 @@ import java.util.ArrayList;
 public class VendingMachineGui {
     ButtonGroup coinSelection;
     private VendingMachine vendingMachine = new VendingMachine(5, new ArrayList<>());
-    private JButton a1Button;
-    private JButton a2Button;
-    private JButton a3Button;
-    private JLabel displayLabel;
-    private JLabel coinReturnLabel;
-    private JLabel bankBalanceLabel;
-    private JPanel vendingPanel;
-    private JLabel product2;
+    protected JButton a1Button;
+    protected JButton a2Button;
+    protected JButton a3Button;
+    protected JLabel displayLabel;
+    protected JLabel coinReturnLabel;
+    protected JLabel bankBalanceLabel;
+    protected JPanel vendingPanel;
+    protected JLabel product2;
     //((ItemSlot)vendingMachine.getInventory().get(1)).getItem();
-    private JLabel product3;
-    private JLabel product1;
-    private JRadioButton pennyRadio;
-    private JRadioButton dollarRadioButton;
-    private JRadioButton quarterRadioButton;
-    private JRadioButton dimeRadioButton;
-    private JRadioButton nickleRadioButton;
-    private JButton insertCoinButton;
-    private JButton emptyCoinReturnButton;
-    private JButton returnAllCoinsButton;
+    protected JLabel product3;
+    protected JLabel product1;
+    protected JRadioButton pennyRadio;
+    protected JRadioButton dollarRadioButton;
+    protected JRadioButton quarterRadioButton;
+    protected JRadioButton dimeRadioButton;
+    protected JRadioButton nickleRadioButton;
+    protected JButton insertCoinButton;
+    protected JButton emptyCoinReturnButton;
+    protected JButton returnAllCoinsButton;
 
-    public VendingMachineGui() {
+    public VendingMachineGui(VendingMachine vendingMachine) {
         product1.setText(((ItemSlot) vendingMachine.getInventory().get(1)).getItem());
         product2.setText(((ItemSlot) vendingMachine.getInventory().get(2)).getItem());
         product3.setText(((ItemSlot) vendingMachine.getInventory().get(3)).getItem());
@@ -93,7 +93,7 @@ public class VendingMachineGui {
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("Vending Machine");
-        frame.setContentPane(new VendingMachineGui().vendingPanel);
+        frame.setContentPane(new VendingMachineGui(new VendingMachine(5, new ArrayList<>())).vendingPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
@@ -105,7 +105,7 @@ public class VendingMachineGui {
         coinReturnLabel.setText(vendingMachine.getCoinReturn().getCoinReturnString().toString());
     }
 
-    private Coin getCoinForSelectedRadio() {
+    protected Coin getCoinForSelectedRadio() {
         if (pennyRadio.isSelected()) {
             return Coin.PENNY;
         } else if (nickleRadioButton.isSelected()) {
