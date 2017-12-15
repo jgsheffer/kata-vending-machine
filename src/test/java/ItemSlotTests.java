@@ -1,7 +1,5 @@
 import org.junit.Test;
 
-import java.util.ArrayList;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
@@ -60,14 +58,14 @@ public class ItemSlotTests {
     }
 
     @Test
-    public void whenCostIs70_ThenGetMostPossiblyOwnedShouldReturn5(){
+    public void whenCostIs70_ThenGetMostPossiblyOwnedShouldReturn5() {
         ItemSlot itemSlot = new ItemSlot(70, "cola", 6);
         int expectedMaxChangeNeeded = 5;
         assertEquals(expectedMaxChangeNeeded, itemSlot.getMostPossiblyOwed());
     }
 
     @Test
-    public void whenCostIs5_ThenGetMostPossiblyOwnedShouldReturn20(){
+    public void whenCostIs5_ThenGetMostPossiblyOwnedShouldReturn20() {
         ItemSlot itemSlot = new ItemSlot(5, "cola", 6);
         int expectedMaxChangeNeeded = 20;
         assertEquals(expectedMaxChangeNeeded, itemSlot.getMostPossiblyOwed());

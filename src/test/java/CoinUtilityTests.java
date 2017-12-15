@@ -3,9 +3,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by Jared on 12/15/2017.
@@ -15,29 +13,30 @@ public class CoinUtilityTests {
     CoinUtility coinUtility;
 
     @Before
-    public void setup(){
+    public void setup() {
         coinUtility = new CoinUtility();
     }
 
     @Test
-    public void whenAddCoinToColletionIsCalled_ThenItReturnsAnArrayListWithTheCorrectNumberOfCoins(){
+    public void whenAddCoinToColletionIsCalled_ThenItReturnsAnArrayListWithTheCorrectNumberOfCoins() {
         ArrayList<Coin> expectedArrayList = new ArrayList<>();
         expectedArrayList.add(Coin.DIME);
         expectedArrayList.add(Coin.DIME);
         expectedArrayList.add(Coin.DIME);
-        
+
         assertEquals(expectedArrayList, coinUtility.addCoinsToCollection(Coin.DIME, 3));
     }
 
     @Test
-    public void whenAddCoinToColletionIsCalledWithZeroNumberOfCoins_ThenItReturnsAnEmptyArrayList(){
+    public void whenAddCoinToColletionIsCalledWithZeroNumberOfCoins_ThenItReturnsAnEmptyArrayList() {
         ArrayList<Coin> expectedArrayList = new ArrayList<>();
 
         assertEquals(expectedArrayList, coinUtility.addCoinsToCollection(Coin.DIME, 0));
     }
+
     @Test
     public void whenGivenBalanceOf20_ThenGetChangeCombiationReturnsTheCorrectCombinationsOfCoins() {
-        
+
         ArrayList<ArrayList<Coin>> expectedCollection = new ArrayList<>();
         ArrayList<Coin> combo1 = coinUtility.addCoinsToCollection(Coin.NICKLE, 2);
         combo1.add(Coin.DIME);
@@ -52,7 +51,7 @@ public class CoinUtilityTests {
 
     @Test
     public void whenGivenBalanceOf15_ThenGetChangeCombiationReturnsTheCorrectCombinationsOfCoins() {
-        
+
         ArrayList<ArrayList<Coin>> expectedCollection = new ArrayList<>();
         ArrayList<Coin> combo1 = new ArrayList<>();
         combo1.add(Coin.NICKLE);
@@ -66,7 +65,7 @@ public class CoinUtilityTests {
 
     @Test
     public void whenGivenBalanceOf10_ThenGetChangeCombiationReturnsTheCorrectCombinationsOfCoins() {
-        
+
         ArrayList<ArrayList<Coin>> expectedCollection = new ArrayList<>();
         ArrayList<Coin> combo1 = coinUtility.addCoinsToCollection(Coin.NICKLE, 2);
         ArrayList<Coin> combo2 = coinUtility.addCoinsToCollection(Coin.DIME, 1);
@@ -78,7 +77,7 @@ public class CoinUtilityTests {
 
     @Test
     public void whenGivenBalanceOf5_ThenGetChangeCombiationReturnsTheCorrectCombinationsOfCoins() {
-        
+
         ArrayList<ArrayList<Coin>> expectedCollection = new ArrayList<>();
         ArrayList<Coin> combo1 = coinUtility.addCoinsToCollection(Coin.NICKLE, 1);
         expectedCollection.add(combo1);
@@ -88,7 +87,7 @@ public class CoinUtilityTests {
 
     @Test
     public void whenGivenBalanceOf0_ThenReturnsEmptyArray() {
-        
+
         ArrayList<ArrayList<Coin>> expectedCollection = new ArrayList<>();
 
         assertEquals(expectedCollection, coinUtility.getChangeCombinations(0));
@@ -110,7 +109,7 @@ public class CoinUtilityTests {
         bank.add(Coin.NICKLE);
         bank.add(Coin.NICKLE);
         bank.add(Coin.NICKLE);
-        assertTrue(coinUtility.canMakeChange(bank ,20 ));
+        assertTrue(coinUtility.canMakeChange(bank, 20));
     }
 
     @Test
@@ -118,12 +117,12 @@ public class CoinUtilityTests {
 
         ArrayList<Coin> bank = new ArrayList<>();
 
-        assertFalse(coinUtility.canMakeChange(bank ,20 ));
+        assertFalse(coinUtility.canMakeChange(bank, 20));
     }
 
 
     @Test
-    public void removingCoinsOnlyRemovesTheCorrectNumberOfCoins(){
+    public void removingCoinsOnlyRemovesTheCorrectNumberOfCoins() {
         ArrayList<Coin> expected = new ArrayList<>();
         expected.add(Coin.QUARTER);
         expected.add(Coin.NICKLE);
@@ -141,7 +140,7 @@ public class CoinUtilityTests {
     }
 
     @Test
-    public void addCoinsOnlyIfAvailableTest(){
+    public void addCoinsOnlyIfAvailableTest() {
         ArrayList<Coin> expected = new ArrayList<>();
         expected.add(Coin.QUARTER);
 

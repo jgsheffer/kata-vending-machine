@@ -7,6 +7,7 @@ import java.util.ArrayList;
  * Created by Jared on 12/15/2017.
  */
 public class VendingMachineGui {
+    ButtonGroup coinSelection;
     private VendingMachine vendingMachine = new VendingMachine(5, new ArrayList<>());
     private JButton a1Button;
     private JButton a2Button;
@@ -27,16 +28,15 @@ public class VendingMachineGui {
     private JButton insertCoinButton;
     private JButton emptyCoinReturnButton;
     private JButton returnAllCoinsButton;
-    ButtonGroup coinSelection;
 
-    public VendingMachineGui(){
-        product1.setText(((ItemSlot)vendingMachine.getInventory().get(1)).getItem());
-        product2.setText(((ItemSlot)vendingMachine.getInventory().get(2)).getItem());
-        product3.setText(((ItemSlot)vendingMachine.getInventory().get(3)).getItem());
+    public VendingMachineGui() {
+        product1.setText(((ItemSlot) vendingMachine.getInventory().get(1)).getItem());
+        product2.setText(((ItemSlot) vendingMachine.getInventory().get(2)).getItem());
+        product3.setText(((ItemSlot) vendingMachine.getInventory().get(3)).getItem());
         displayLabel.setText(vendingMachine.getCurrentDisplay());
         bankBalanceLabel.setText(vendingMachine.getBank().toString());
 
-       coinSelection = new ButtonGroup();
+        coinSelection = new ButtonGroup();
         coinSelection.add(pennyRadio);
         coinSelection.add(nickleRadioButton);
         coinSelection.add(dimeRadioButton);
@@ -76,7 +76,7 @@ public class VendingMachineGui {
         returnAllCoinsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               vendingMachine.pushChangeReturnButton();
+                vendingMachine.pushChangeReturnButton();
                 displayLabel.setText(vendingMachine.getCurrentDisplay());
                 updateMachine();
             }
@@ -91,31 +91,31 @@ public class VendingMachineGui {
 
     }
 
-    private void updateMachine(){
-        bankBalanceLabel.setText(vendingMachine.getBank().toString());
-        displayLabel.setText(vendingMachine.getCurrentDisplay());
-        coinReturnLabel.setText(vendingMachine.getCoinReturn().getCoinReturnString().toString());
-    }
-
-    private Coin getCoinForSelectedRadio(){
-        if(pennyRadio.isSelected()){
-            return Coin.PENNY;
-        }else if(nickleRadioButton.isSelected()){
-            return Coin.NICKLE;
-        }else if(dimeRadioButton.isSelected()) {
-            return Coin.DIME;
-        }else if(quarterRadioButton.isSelected()) {
-            return Coin.QUARTER;
-        }else{
-            return Coin.DOLLAR;
-        }
-    }
-
-    public static void main(String[] args){
+    public static void main(String[] args) {
         JFrame frame = new JFrame("Vending Machine");
         frame.setContentPane(new VendingMachineGui().vendingPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+    }
+
+    private void updateMachine() {
+        bankBalanceLabel.setText(vendingMachine.getBank().toString());
+        displayLabel.setText(vendingMachine.getCurrentDisplay());
+        coinReturnLabel.setText(vendingMachine.getCoinReturn().getCoinReturnString().toString());
+    }
+
+    private Coin getCoinForSelectedRadio() {
+        if (pennyRadio.isSelected()) {
+            return Coin.PENNY;
+        } else if (nickleRadioButton.isSelected()) {
+            return Coin.NICKLE;
+        } else if (dimeRadioButton.isSelected()) {
+            return Coin.DIME;
+        } else if (quarterRadioButton.isSelected()) {
+            return Coin.QUARTER;
+        } else {
+            return Coin.DOLLAR;
+        }
     }
 }

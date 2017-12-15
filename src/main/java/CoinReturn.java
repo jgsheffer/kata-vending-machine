@@ -39,9 +39,9 @@ public class CoinReturn {
         return bank;
     }
 
-    public ArrayList<String> getCoinReturnString(){
+    public ArrayList<String> getCoinReturnString() {
         ArrayList<String> coinReturnString = new ArrayList<>();
-        for(Enum coin : coinReturnCollection){
+        for (Enum coin : coinReturnCollection) {
             coinReturnString.add(coin.toString());
         }
         return coinReturnString;

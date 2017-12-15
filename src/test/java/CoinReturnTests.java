@@ -12,11 +12,10 @@ import static org.junit.Assert.assertEquals;
  */
 public class CoinReturnTests {
     CoinReturn coinReturn;
-    ArrayList<Coin> bank= new ArrayList<>();
+    ArrayList<Coin> bank = new ArrayList<>();
 
     @Before
-    public void setup()
-    {
+    public void setup() {
         bank.add(Coin.QUARTER);
         bank.add(Coin.QUARTER);
         bank.add(Coin.QUARTER);
@@ -59,7 +58,7 @@ public class CoinReturnTests {
         ArrayList<Coin> expectedCollection = new ArrayList();
         expectedCollection.add(Coin.NICKLE);
 
-        coinReturn.addCorrectChangeToReturn(bank,5);
+        coinReturn.addCorrectChangeToReturn(bank, 5);
 
         assertEquals(expectedCollection, coinReturn.getCoinReturnCollection());
 
@@ -111,7 +110,7 @@ public class CoinReturnTests {
     }
 
     @Test
-    public void getCoinReturnStringWillReturnAStringArrayList(){
+    public void getCoinReturnStringWillReturnAStringArrayList() {
         coinReturn.addCoinToCoinReturn(Coin.QUARTER);
         ArrayList<String> expectedArrayList = new ArrayList<>();
         expectedArrayList.add("QUARTER");

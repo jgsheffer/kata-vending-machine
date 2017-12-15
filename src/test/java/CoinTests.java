@@ -21,7 +21,7 @@ public class CoinTests {
         startingChange.add(Coin.NICKLE);
         startingChange.add(Coin.NICKLE);
         startingChange.add(Coin.NICKLE);
-        vendingMachine = new VendingMachine(3,startingChange);
+        vendingMachine = new VendingMachine(3, startingChange);
     }
 
     @Test

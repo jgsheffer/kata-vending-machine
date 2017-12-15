@@ -38,11 +38,11 @@ public class CoinUtility {
         return coinCombinations;
     }
 
-    public boolean canMakeChange(ArrayList<Coin> bank, int balanceDue){
+    public boolean canMakeChange(ArrayList<Coin> bank, int balanceDue) {
         boolean changeIsPossible = false;
         ArrayList<ArrayList<Coin>> changePossibilties = getChangeCombinations(balanceDue);
-        for(ArrayList<Coin> change : changePossibilties){
-            if(bank.containsAll(change)){
+        for (ArrayList<Coin> change : changePossibilties) {
+            if (bank.containsAll(change)) {
                 changeIsPossible = true;
                 break;
             }
@@ -51,8 +51,8 @@ public class CoinUtility {
 
     }
 
-    public ArrayList removeCoins(ArrayList<Coin> bank, ArrayList<Coin> coinsToRemove){
-        for(Coin coin : coinsToRemove){
+    public ArrayList removeCoins(ArrayList<Coin> bank, ArrayList<Coin> coinsToRemove) {
+        for (Coin coin : coinsToRemove) {
             bank.remove(coin);
         }
         return bank;

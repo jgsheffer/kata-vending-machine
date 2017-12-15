@@ -30,9 +30,9 @@ public class VendingMachine {
         hasDisplayedPrice = false;
         showInsertCoinSwitch = true;
         currentCoinBalanceCollection = new ArrayList<>();
-        bank =startingChange;
+        bank = startingChange;
         setupInventory();
-        if(shouldShowExactChangeOnly()){
+        if (shouldShowExactChangeOnly()) {
             currentDisplay = Constants.EXACT_CHANGE_ONLY;
         }
     }
@@ -140,9 +140,9 @@ public class VendingMachine {
         if (currentBalance > 0) {
             message = Constants.CURRENT_BALANCE_STRING_START + formatMoney(Double.valueOf(currentBalance) / 100);
         } else {
-            if(shouldShowExactChangeOnly()){
+            if (shouldShowExactChangeOnly()) {
                 message = Constants.EXACT_CHANGE_ONLY;
-            }else {
+            } else {
                 message = Constants.INSERT_COIN;
             }
         }
@@ -162,15 +162,15 @@ public class VendingMachine {
         return bank;
     }
 
-    private boolean shouldShowExactChangeOnly(){
+    private boolean shouldShowExactChangeOnly() {
         CoinUtility coinUtility = new CoinUtility();
         ItemSlot itemSlot1 = inventory.get(1);
         ItemSlot itemSlot2 = inventory.get(2);
         ItemSlot itemSlot3 = inventory.get(3);
-       boolean canMakeChangeForSlot1 = coinUtility.canMakeChange(bank, inventory.get(1).getMostPossiblyOwed());
-       boolean canMakeChangeForSlot2 = coinUtility.canMakeChange(bank, inventory.get(2).getMostPossiblyOwed());
-       boolean canMakeChangeForSlot3 = coinUtility.canMakeChange(bank, inventory.get(3).getMostPossiblyOwed());
-       return !canMakeChangeForSlot1 && !canMakeChangeForSlot2 && !canMakeChangeForSlot3;
+        boolean canMakeChangeForSlot1 = coinUtility.canMakeChange(bank, inventory.get(1).getMostPossiblyOwed());
+        boolean canMakeChangeForSlot2 = coinUtility.canMakeChange(bank, inventory.get(2).getMostPossiblyOwed());
+        boolean canMakeChangeForSlot3 = coinUtility.canMakeChange(bank, inventory.get(3).getMostPossiblyOwed());
+        return !canMakeChangeForSlot1 && !canMakeChangeForSlot2 && !canMakeChangeForSlot3;
     }
 
 }

@@ -201,7 +201,7 @@ public class VendingMachineTests {
     }
 
     @Test
-    public void ifVendingMachineCantMakeChangeForBalanceThenProductIsGivenButTheMachineEatsTheChange(){
+    public void ifVendingMachineCantMakeChangeForBalanceThenProductIsGivenButTheMachineEatsTheChange() {
         ArrayList<Coin> expectedEndingBalance = new ArrayList<>();
         expectedEndingBalance.add(Coin.QUARTER);
         expectedEndingBalance.add(Coin.QUARTER);
@@ -211,15 +211,15 @@ public class VendingMachineTests {
         vendingMachine.insert(Coin.QUARTER);
         vendingMachine.insert(Coin.QUARTER);
 
-        assertEquals(5, ((ItemSlot)vendingMachine.getInventory().get(1)).getNumberOfItemsAvailable());
-        assertEquals(new ArrayList<Coin>(),vendingMachine.getBank());
-        assertEquals(new ArrayList<Coin>(),vendingMachine.getCoinReturn().getCoinReturnCollection());
+        assertEquals(5, ((ItemSlot) vendingMachine.getInventory().get(1)).getNumberOfItemsAvailable());
+        assertEquals(new ArrayList<Coin>(), vendingMachine.getBank());
+        assertEquals(new ArrayList<Coin>(), vendingMachine.getCoinReturn().getCoinReturnCollection());
         assertEquals(75, vendingMachine.getCurrentBalance());
         vendingMachine.pressButton(3);
 
-        assertEquals(5, ((ItemSlot)vendingMachine.getInventory().get(1)).getNumberOfItemsAvailable());
-        assertEquals(expectedEndingBalance,vendingMachine.getBank());
-        assertEquals(new ArrayList<Coin>(),vendingMachine.getCoinReturn().getCoinReturnCollection());
+        assertEquals(5, ((ItemSlot) vendingMachine.getInventory().get(1)).getNumberOfItemsAvailable());
+        assertEquals(expectedEndingBalance, vendingMachine.getBank());
+        assertEquals(new ArrayList<Coin>(), vendingMachine.getCoinReturn().getCoinReturnCollection());
         assertEquals(0, vendingMachine.getCurrentBalance());
     }
 

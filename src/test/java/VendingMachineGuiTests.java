@@ -5,9 +5,9 @@ import org.junit.Test;
  */
 public class VendingMachineGuiTests {
 
-//    @Test
-//    public void whenCreated_ThenTheVendingMachineLabelsAreSetCorrectly(){
-//        VendingMachineGui vendingMachineGui = new VendingMachineGui();
-//        vendingMachineGui
-//    }
+    @Test
+    public void whenCreated_ThenTheVendingMachineLabelsAreSetCorrectly() {
+        VendingMachineGui.main(null);
+
+    }
 }
