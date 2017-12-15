@@ -6,6 +6,8 @@ public class ItemSlot {
     private int price;
     private String item;
     private int numberOfItemsAvailable;
+    private CoinUtility coinUtility = new CoinUtility();
+
 
     public ItemSlot(int price, String item, int numberOfItemsAvailable) {
         this.price = price;
@@ -28,12 +30,38 @@ public class ItemSlot {
     }
 
     public boolean dispense() {
-        if(numberOfItemsAvailable>0) {
+        if (numberOfItemsAvailable > 0) {
             numberOfItemsAvailable--;
             return true;
         }
         return false;
+    }
 
+//    public void canMakeChange(ArrayList<Coin> bank){
+//        ArrayList<Coin> worstCaseCollection
+//    }
 
+//    public ArrayList<ArrayList<Coin>> getChangeCombinations(int balance){
+//        int mostPossiblyOwed = getMostPossiblyOwed(removeQuartersFromBalance(balance));
+//        switch(mostPossiblyOwed){
+//            case 5:
+//        }
+//
+//    }
+
+    public int getMostPossiblyOwed(int balance) {
+        if ((balance - Constants.QUARTER_AMOUNT) < 0) {
+            return Math.abs(balance - Constants.QUARTER_AMOUNT);
+        } else {
+            return Constants.NICKLE_AMOUNT;
+        }
+    }
+
+    public int removeQuartersFromBalance(int balance) {
+        int balanceWithRemovedQuarters = balance;
+        while ((balanceWithRemovedQuarters - Constants.QUARTER_AMOUNT) > 0) {
+            balanceWithRemovedQuarters = balanceWithRemovedQuarters - Constants.QUARTER_AMOUNT;
+        }
+        return balanceWithRemovedQuarters;
     }
 }
