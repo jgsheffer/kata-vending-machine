@@ -54,7 +54,7 @@ public class CoinReturnTests {
     }
 
     @Test
-    public void whenGivenABalanceOf005_ThenGetChangeToReturnWillReturnANickle() {
+    public void whenGivenABalanceOf005_ThenGetChangeToReturnWillReturnANickel() {
         ArrayList<Coin> expectedCollection = new ArrayList();
         expectedCollection.add(Coin.NICKLE);
 
@@ -66,7 +66,7 @@ public class CoinReturnTests {
     }
 
     @Test
-    public void whenGivenABalanceOf015_ThenGetChangeToReturnWillReturnANickleAndADime() {
+    public void whenGivenABalanceOf015_ThenGetChangeToReturnWillReturnANickelAndADime() {
         ArrayList<Coin> expectedCollection = new ArrayList();
         expectedCollection.add(Coin.NICKLE);
         expectedCollection.add(Coin.DIME);
@@ -81,7 +81,7 @@ public class CoinReturnTests {
     }
 
     @Test
-    public void whenGivenABalanceOf040_ThenGetChangeToReturnWillReturnANickleQuarterAndADime() {
+    public void whenGivenABalanceOf040_ThenGetChangeToReturnWillReturnANickelQuarterAndADime() {
         ArrayList<Coin> expectedCollection = new ArrayList();
         expectedCollection.add(Coin.NICKLE);
         expectedCollection.add(Coin.DIME);
@@ -94,7 +94,7 @@ public class CoinReturnTests {
     }
 
     @Test
-    public void whenGivenABalanceOf115_ThenGetChangeToReturnWillReturnANickleDimeAndFourQuarters() {
+    public void whenGivenABalanceOf115_ThenGetChangeToReturnWillReturnANickelDimeAndFourQuarters() {
         ArrayList<Coin> expectedCollection = new ArrayList();
         expectedCollection.add(Coin.NICKLE);
         expectedCollection.add(Coin.DIME);

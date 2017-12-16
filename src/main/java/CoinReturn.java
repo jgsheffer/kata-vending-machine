@@ -30,9 +30,9 @@ public class CoinReturn {
             changeDue.addAll(coinUtility.addCoinsToCollection(Coin.DIME, numberOfDimes));
             balanceDue = balanceDue - numberOfDimes * Constants.DIME_AMOUNT;
 
-            int numberOfNickles = balanceDue / Constants.NICKLE_AMOUNT;
-            changeDue.addAll(coinUtility.addCoinsToCollection(Coin.NICKLE, numberOfNickles));
-            balanceDue = balanceDue - numberOfNickles * Constants.NICKLE_AMOUNT;
+            int numberOfNickels = balanceDue / Constants.NICKLE_AMOUNT;
+            changeDue.addAll(coinUtility.addCoinsToCollection(Coin.NICKLE, numberOfNickels));
+            balanceDue = balanceDue - numberOfNickels * Constants.NICKLE_AMOUNT;
         }
         CoinUtility coinUtility = new CoinUtility();
         coinReturnCollection = coinUtility.addCoinsOnlyIfAvailable(bank, changeDue, coinReturnCollection);

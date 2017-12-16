@@ -8,7 +8,7 @@ import java.util.ArrayList;
  */
 public class VendingMachineGui {
     ButtonGroup coinSelection;
-    private VendingMachine vendingMachine = new VendingMachine(5, new ArrayList<>());
+    private VendingMachine vendingMachine;
     protected JButton a1Button;
     protected JButton a2Button;
     protected JButton a3Button;
@@ -28,8 +28,11 @@ public class VendingMachineGui {
     protected JButton insertCoinButton;
     protected JButton emptyCoinReturnButton;
     protected JButton returnAllCoinsButton;
+    protected JButton emptyBankButton;
+    final String html1 = "<html><body style='width:137px'>";
 
     public VendingMachineGui(VendingMachine vendingMachine) {
+        this.vendingMachine = vendingMachine;
         product1.setText(((ItemSlot) vendingMachine.getInventory().get(1)).getItem());
         product2.setText(((ItemSlot) vendingMachine.getInventory().get(2)).getItem());
         product3.setText(((ItemSlot) vendingMachine.getInventory().get(3)).getItem());
@@ -89,6 +92,13 @@ public class VendingMachineGui {
             }
         });
 
+        emptyBankButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                vendingMachine.getBank().clear();
+                updateMachine();
+            }
+        });
     }
 
     public static void main(String[] args) {
@@ -100,9 +110,9 @@ public class VendingMachineGui {
     }
 
     private void updateMachine() {
-        bankBalanceLabel.setText(vendingMachine.getBank().toString());
+        bankBalanceLabel.setText(html1+vendingMachine.getBank().toString());
         displayLabel.setText(vendingMachine.getCurrentDisplay());
-        coinReturnLabel.setText(vendingMachine.getCoinReturn().getCoinReturnString().toString());
+        coinReturnLabel.setText(html1+vendingMachine.getCoinReturn().getCoinReturnString().toString());
     }
 
     protected Coin getCoinForSelectedRadio() {

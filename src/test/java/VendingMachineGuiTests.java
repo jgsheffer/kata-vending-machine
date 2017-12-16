@@ -18,17 +18,20 @@ public class VendingMachineGuiTests {
 
     @Mock
     VendingMachine vendingMachineMock;
+    @Mock
+    ArrayList<Coin> mockBank;
 
     @Before
     public void setup(){
         MockitoAnnotations.initMocks(this);
-        subject  = new VendingMachineGui(new VendingMachine(5, new ArrayList<>()));
+
+        subject  = new VendingMachineGui(new VendingMachine(5, mockBank));
     }
 
     @Test
     public void whenCreated_ThenTheVendingMachineLabelsAreSetCorrectly() {
         assertEquals("Penny", subject.pennyRadio.getText());
-        assertEquals("Nickle", subject.nickleRadioButton.getText());
+        assertEquals("Nickel", subject.nickleRadioButton.getText());
         assertEquals("Dime", subject.dimeRadioButton.getText());
         assertEquals("Quarter", subject.quarterRadioButton.getText());
         assertEquals("Dollar", subject.dollarRadioButton.getText());
@@ -83,6 +86,7 @@ public class VendingMachineGuiTests {
 
         subject.nickleRadioButton.setSelected(true);
         subject.emptyCoinReturnButton.doClick();
+        subject.emptyBankButton.doClick();
         verify(vendingMachineMock.getCoinReturn(), times(1)).emptyCoinReturn();
     }
 

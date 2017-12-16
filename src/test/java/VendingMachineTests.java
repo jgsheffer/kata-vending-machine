@@ -70,6 +70,30 @@ public class VendingMachineTests {
     }
 
     @Test
+    public void pressingTheButtonForEachItemOnlyShowsThePriceOnce_ThenItResetsOnPurchase() {
+        //        Add Money to bank
+        vendingMachine.insert(Coin.NICKLE);
+        vendingMachine.insert(Coin.DIME);
+        vendingMachine.insert(Coin.DIME);
+        vendingMachine.insert(Coin.QUARTER);
+        vendingMachine.pressButton(2);
+        String firstExpectedMessage = "PRICE : $1.00";
+        String secondExpectedMessage = "INSERT COIN";
+
+        vendingMachine.pressButton(1);
+        assertEquals(firstExpectedMessage, vendingMachine.getCurrentDisplay());
+        vendingMachine.pressButton(1);
+        assertEquals(secondExpectedMessage, vendingMachine.getCurrentDisplay());
+        vendingMachine.pressButton(1);
+        assertEquals(secondExpectedMessage, vendingMachine.getCurrentDisplay());
+        vendingMachine.pressButton(2);
+        assertEquals(secondExpectedMessage, vendingMachine.getCurrentDisplay());
+        vendingMachine.pressButton(3);
+        assertEquals(secondExpectedMessage, vendingMachine.getCurrentDisplay());
+    }
+
+
+    @Test
     public void whenIInsertEnoughMoneyAndIPressThe2Button_ThenTheAmountWillBeDeductedFromTheBalance() {
         Double expectedBalance = 0.0;
 

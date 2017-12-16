@@ -12,8 +12,9 @@ public class VendingMachine {
     private HashMap<Integer, ItemSlot> inventory;
     private String currentDisplay;
     private CoinReturn coinReturn;
-    private boolean hasDisplayedPrice;
-    private boolean showInsertCoinSwitch;
+    private boolean hasDisplayedPrice1;
+    private boolean hasDisplayedPrice2;
+    private boolean hasDisplayedPrice3;
     private ArrayList<Coin> currentCoinBalanceCollection;
     private ArrayList<Coin> bank;
 
@@ -27,8 +28,9 @@ public class VendingMachine {
         currentDisplay = Constants.INSERT_COIN;
         inventory = new HashMap<>();
         coinReturn = new CoinReturn();
-        hasDisplayedPrice = false;
-        showInsertCoinSwitch = true;
+        hasDisplayedPrice1 = false;
+        hasDisplayedPrice2 = false;
+        hasDisplayedPrice3 = false;
         currentCoinBalanceCollection = new ArrayList<>();
         bank = startingChange;
         setupInventory();
@@ -104,11 +106,13 @@ public class VendingMachine {
                     currentBalance = currentBalance - selectedItem.getPrice();
                     sendRemainingBalanceToCoinReturn();
                     currentDisplay = Constants.THANK_YOU;
+                    resetHasShowPriceForItems();
                 } else {
                     currentDisplay = Constants.SOLD_OUT;
+                    resetHasShowPriceForItems();
                 }
-            } else if (!hasDisplayedPrice) {
-                hasDisplayedPrice = true;
+            } else if (!hasShownPriceForItem(position)) {
+                ShowingPriceForItem(position);
                 currentDisplay = "PRICE : " + formatMoney(Double.valueOf(selectedItem.getPrice()) / 100);
             } else {
                 currentDisplay = getInvalidBalanceMessage();
@@ -118,15 +122,47 @@ public class VendingMachine {
         }
     }
 
+    private boolean hasShownPriceForItem(int item){
+        switch(item) {
+            case 1:
+                return hasDisplayedPrice1;
+            case 2:
+                return hasDisplayedPrice2;
+            default:
+                return hasDisplayedPrice3;
+        }
+    }
+
+    private void ShowingPriceForItem(int item){
+        switch(item) {
+            case 1:
+                hasDisplayedPrice1 = true;
+            case 2:
+                hasDisplayedPrice2 = true;
+            default:
+                hasDisplayedPrice3 = true;
+        }
+    }
+
+    private void resetHasShowPriceForItems(){
+        hasDisplayedPrice1 = false;
+        hasDisplayedPrice2 = false;
+        hasDisplayedPrice3 = false;
+    }
+
+
+
     private void sendRemainingBalanceToCoinReturn() {
         getBank().addAll(currentCoinBalanceCollection);
         bank = coinReturn.addCorrectChangeToReturn(bank, currentBalance);
+        currentCoinBalanceCollection.clear();
         currentBalance = 0;
 
     }
 
     public void pushChangeReturnButton() {
-        sendRemainingBalanceToCoinReturn();
+        coinReturn.getCoinReturnCollection().addAll(currentCoinBalanceCollection);
+        currentCoinBalanceCollection.clear();
         currentBalance = 0;
     }
 

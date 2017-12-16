@@ -15,13 +15,13 @@ public class CoinUtility {
 
     public ArrayList<ArrayList<Coin>> getChangeCombinations(int balance) {
         ArrayList<ArrayList<Coin>> coinCombinations = new ArrayList<>();
-        for (int numOfNickles = balance; numOfNickles >= 0; numOfNickles--) {
+        for (int numOfNickels = balance; numOfNickels >= 0; numOfNickels--) {
             if (balance < 5) {
                 break;
             }
-            int newBalance = balance - 5 * numOfNickles;
+            int newBalance = balance - 5 * numOfNickels;
             if (newBalance == 0) {
-                coinCombinations.add(addCoinsToCollection(Coin.NICKLE, numOfNickles));
+                coinCombinations.add(addCoinsToCollection(Coin.NICKLE, numOfNickels));
             }
             for (int numberOfDimes = newBalance / 5; numberOfDimes >= 0; numberOfDimes--) {
                 if (newBalance < 10) {
@@ -29,7 +29,7 @@ public class CoinUtility {
                 }
                 int finalBalance = newBalance - 10 * numberOfDimes;
                 if (finalBalance == 0) {
-                    ArrayList<Coin> nickleAndDimeCollection = addCoinsToCollection(Coin.NICKLE, numOfNickles);
+                    ArrayList<Coin> nickleAndDimeCollection = addCoinsToCollection(Coin.NICKLE, numOfNickels);
                     nickleAndDimeCollection.addAll(addCoinsToCollection(Coin.DIME, numberOfDimes));
                     coinCombinations.add(nickleAndDimeCollection);
                 }

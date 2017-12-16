@@ -56,14 +56,14 @@ public class CoinTests {
     }
 
     @Test
-    public void whenANickleIsInserted_ThenTheVendingMachineReturnsCurrentBalanceString() {
+    public void whenANickelIsInserted_ThenTheVendingMachineReturnsCurrentBalanceString() {
         String expectedBalanceString = currentBalanceString + "$0.05";
 
         assertEquals(expectedBalanceString, vendingMachine.insert(Coin.NICKLE));
     }
 
     @Test
-    public void whenMultipleNicklesAreInserted_ThenTheBalanceIsAddedTogether() {
+    public void whenMultipleNickelsAreInserted_ThenTheBalanceIsAddedTogether() {
         String expectedBalanceFirstCoin = currentBalanceString + "$0.05";
         String expectedBalanceSecondCoin = currentBalanceString + "$0.10";
 
@@ -72,7 +72,7 @@ public class CoinTests {
     }
 
     @Test
-    public void whenANickleAndAQuarterAreInserted_ThenTheBalanceIsCompounded() {
+    public void whenANickelAndAQuarterAreInserted_ThenTheBalanceIsCompounded() {
         String expectedBalanceFirstCoin = currentBalanceString + "$0.05";
         String expectedBalanceSecondCoin = currentBalanceString + "$0.30";
 
@@ -98,7 +98,7 @@ public class CoinTests {
     }
 
     @Test
-    public void whenADimeANickleAndAQuarterAreInserted_ThenTheBalanceIsCompounded() {
+    public void whenADimeANickelAndAQuarterAreInserted_ThenTheBalanceIsCompounded() {
         String expectedBalanceFirstCoin = currentBalanceString + "$0.05";
         String expectedBalanceSecondCoin = currentBalanceString + "$0.30";
         String expectedBalanceThirdCoin = currentBalanceString + "$0.40";
